@@ -35,7 +35,12 @@
                 Setelah diverifikasi, layanan Anda akan tampil di platform dalam 1-3 hari kerja.
               </div>
 
-              <form @submit.prevent="submitForm">
+              <form 
+                @submit.prevent="submitForm"
+                name="company-registration"
+                method="POST"
+                data-netlify="true"
+              >
                 <!-- Company Basic Info -->
                 <div class="form-section mb-5">
                   <h5 class="section-title">
@@ -354,6 +359,9 @@
                   </div>
                 </div>
 
+                <!-- Hidden fields for Netlify Forms -->
+                <input type="hidden" name="form-name" value="company-registration" />
+
                 <!-- Submit Button -->
                 <div class="text-center">
                   <button 
@@ -425,24 +433,45 @@ const submitForm = async () => {
   submitting.value = true
   
   try {
-    // Simulate form submission
-    await new Promise(resolve => setTimeout(resolve, 2000))
-    
-    // Here would be actual form submission logic
-    console.log('Form data:', formData)
-    
-    // Show success message
-    alert('Pendaftaran berhasil dikirim! Kami akan meninjau dan menghubungi Anda dalam 1-3 hari kerja.')
-    
-    // Reset form
-    Object.keys(formData).forEach(key => {
-      if (Array.isArray(formData[key])) {
-        formData[key] = []
-      } else {
-        formData[key] = key === 'availability' ? 'accepting' : ''
-      }
+    // Validate required fields
+    if (!formData.companyName || !formData.contactPerson || !formData.whatsapp) {
+      alert('Mohon lengkapi semua field yang wajib diisi.')
+      return
+    }
+
+    // Prepare form data for submission
+    const submissionData = {
+      'form-name': 'company-registration',
+      companyName: formData.companyName,
+      contactPerson: formData.contactPerson,
+      whatsapp: formData.whatsapp,
+      instagram: formData.instagram,
+      email: formData.email,
+      website: formData.website,
+      serviceAreas: formData.serviceAreas.join(', '),
+      serviceTypes: formData.serviceTypes.join(', '),
+      pickupFrequency: formData.pickupFrequency.join(', '),
+      pricing: formData.pricing,
+      wasteTypes: formData.wasteTypes.join(', '),
+      availability: formData.availability,
+      description: formData.description
+    }
+
+    // Submit to Netlify Forms
+    const response = await fetch('/', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+      },
+      body: new URLSearchParams(submissionData).toString()
     })
-    selectedKabupaten.value = ''
+
+    if (response.ok) {
+      // Redirect to success page
+      window.location.href = '/success.html'
+    } else {
+      throw new Error('Form submission failed')
+    }
     
   } catch (error) {
     console.error('Form submission error:', error)

@@ -38,7 +38,7 @@ Platform Layanan Komposting Bali adalah website berbasis Vue.js yang bertujuan u
 - **Build Tool**: Vite
 - **Maps**: Leaflet.js
 - **Data**: JSON-based (tanpa database)
-- **Hosting**: GitHub Pages
+- **Hosting**: Netlify
 - **Analytics**: Google Analytics 4
 
 ## 🏗️ Struktur Proyek
@@ -65,39 +65,50 @@ bali-composter-directory/
 └── public/                  # File static
 ```
 
-## 🚀 Instalasi & Development
+## Deployment
 
-### Prerequisites
-- Node.js 18+
-- npm atau yarn
+This project is configured for deployment on **Netlify** with automated builds and form handling.
 
-### Setup Local
+### Quick Deploy to Netlify
 
-1. **Clone repository**
+[![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/yourusername/bali-composter-directory)
+
+### Manual Deployment
+
+1. **Install Netlify CLI:**
    ```bash
-   git clone https://github.com/username/bali-composter-directory.git
-   cd bali-composter-directory
+   npm install -g netlify-cli
    ```
 
-2. **Install dependencies**
+2. **Login to Netlify:**
    ```bash
-   npm install
+   netlify login
    ```
 
-3. **Jalankan development server**
+3. **Deploy:**
    ```bash
-   npm run dev
+   # Build the project
+   npm run build
+   
+   # Deploy to staging
+   netlify deploy --dir=dist
+   
+   # Deploy to production
+   netlify deploy --prod --dir=dist
    ```
 
-4. **Buka browser** ke `http://localhost:3000`
+4. **Automated Setup Script:**
+   ```bash
+   ./scripts/deploy-setup.sh
+   ```
 
-### Build untuk Production
+### Configuration
 
-```bash
-npm run build
-```
+- **Build Command:** `npm run build`
+- **Publish Directory:** `dist/`
+- **Functions Directory:** `functions/`
 
-File hasil build akan ada di folder `dist/`.
+See `DEPLOYMENT.md` for detailed configuration guide.
 
 ## 📊 Status Development
 
@@ -111,7 +122,7 @@ File hasil build akan ada di folder `dist/`.
 - [x] Form pendaftaran perusahaan
 - [x] Marketplace produk komposting
 - [x] Responsive design mobile-first
-- [x] GitHub Pages deployment setup
+- [x] Netlify deployment setup
 
 ### 🚧 In Progress
 - [ ] Integrasi peta Leaflet.js penuh

@@ -8,7 +8,7 @@ You are assisting with the development of a Vue.js-based web platform that conne
 - **CSS Framework**: Bootstrap 5
 - **Data**: JSON-based (no backend database)
 - **Maps**: Leaflet.js for location visualization
-- **Hosting**: GitHub Pages (static site)
+- **Hosting**: Netlify (static site)
 - **Analytics**: Google Analytics 4
 - **Language**: Bahasa Indonesia (primary)
 
@@ -133,7 +133,7 @@ You are assisting with the development of a Vue.js-based web platform that conne
 - All content updates through GitHub repository
 - JSON files managed through pull requests
 - Admin workflow for reviewing company/product submissions
-- Automated deployment to GitHub Pages
+- Automated deployment to Netlify
 
 ### Development Workflow
 - Feature branches for new functionality

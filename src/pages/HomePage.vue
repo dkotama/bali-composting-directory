@@ -148,7 +148,7 @@
               <p class="card-text">
                 Hitung berapa lama waktu yang dibutuhkan untuk membuat kompos
               </p>
-              <button class="btn btn-outline-primary" @click="$emit('navigate', 'howto')">
+              <button class="btn btn-outline-primary" @click="$emit('navigate', 'calculator')">
                 Hitung Sekarang
               </button>
             </div>

@@ -7,7 +7,12 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "serve": "vite preview"
+    "serve": "vite preview",
+    "netlify:dev": "netlify dev",
+    "netlify:build": "netlify build",
+    "netlify:deploy": "netlify deploy",
+    "netlify:deploy:prod": "netlify deploy --prod",
+    "functions:serve": "netlify functions:serve"
   },
   "keywords": ["vue", "composting", "bali", "sustainability", "environment"],
   "author": "Bali Composting Platform",
@@ -21,6 +26,7 @@
   },
   "devDependencies": {
     "@types/leaflet": "^1.9.20",
-    "leaflet": "^1.9.4"
+    "leaflet": "^1.9.4",
+    "netlify-cli": "^17.36.4"
   }
 }

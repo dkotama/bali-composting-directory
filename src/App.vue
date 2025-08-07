@@ -28,13 +28,13 @@
     <!-- Page Content -->
     <main>
       <!-- Homepage -->
-      <HomePage v-if="currentPage === 'home'" />
+      <HomePage v-if="currentPage === 'home'" @navigate="handleNavigation" />
       
       <!-- How-To Page -->
-      <HowToPage v-if="currentPage === 'howto'" />
+      <HowToPage v-if="currentPage === 'howto'" @navigate="handleNavigation" />
       
       <!-- Company Form Page -->
-      <CompanyFormPage v-if="currentPage === 'company-form'" />
+      <CompanyFormPage v-if="currentPage === 'company-form'" @navigate="handleNavigation" />
     </main>
 
     <!-- Footer -->
@@ -64,6 +64,39 @@ import CompanyFormPage from './pages/CompanyFormPage.vue'
 
 // Reactive data
 const currentPage = ref('home')
+
+// Navigation handler
+const handleNavigation = (page) => {
+  console.log('Navigating to:', page)
+  
+  // Map navigation requests to available pages
+  const pageMap = {
+    'home': 'home',
+    'howto': 'howto',
+    'company-form': 'company-form',
+    'product-form': 'company-form', // Redirect to company form for now
+    'products': 'howto', // Redirect to howto page with products tab
+    'calculator': 'howto', // Redirect to howto page with calculator tab
+  }
+  
+  const targetPage = pageMap[page] || 'home'
+  currentPage.value = targetPage
+  
+  // Handle special tab activations
+  setTimeout(() => {
+    if (page === 'products') {
+      const productsTab = document.getElementById('products-tab')
+      if (productsTab) {
+        productsTab.click()
+      }
+    } else if (page === 'calculator') {
+      const calculatorTab = document.getElementById('calculator-tab')
+      if (calculatorTab) {
+        calculatorTab.click()
+      }
+    }
+  }, 100)
+}
 </script>
 
 <style>

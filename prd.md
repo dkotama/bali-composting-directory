@@ -21,7 +21,7 @@ A comprehensive web platform connecting Bali residents with local composting ser
 ### 2.1 Technology Stack
 - **Frontend**: Vue.js 3 with Bootstrap 5
 - **Data**: JSON-based data structure
-- **Hosting**: GitHub Pages
+- **Hosting**: Netlify
 - **Analytics**: Google Analytics 4
 - **Maps**: Leaflet.js for location visualization
 - **Language**: Bahasa Indonesia (primary)
@@ -255,6 +255,6 @@ A comprehensive web platform connecting Bali residents with local composting ser
 - **User-Friendly**: Intuitive navigation for non-technical users
 
 ### 9.3 Maintenance
-- **Static Hosting**: Low-cost, reliable GitHub Pages hosting
+- **Static Hosting**: Low-cost, reliable Netlify hosting with automatic deployments
 - **Simple Updates**: JSON-based content management
 - **Community Driven**: Open for community contributions via GitHub
