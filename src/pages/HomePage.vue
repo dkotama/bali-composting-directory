@@ -181,7 +181,7 @@
 import { ref, reactive, onMounted } from 'vue'
 import SearchForm from '../components/search/SearchForm.vue'
 import CompanyCard from '../components/common/CompanyCard.vue'
-import { loadRegionsData, loadCompaniesData, helpers } from '../utils/dataLoader.js'
+import { dataService } from '../utils/dataService.js'
 
 // Emits
 defineEmits(['navigate'])
@@ -192,9 +192,8 @@ const searchPerformed = ref(false)
 const searchResults = ref([])
 const selectedArea = ref('')
 
-// Data
+// Data - regions still loaded from JSON for search form
 const regions = reactive({ kabupaten: [], kecamatan: [] })
-const companies = ref([])
 
 // Methods
 const scrollToSearch = () => {
@@ -203,49 +202,21 @@ const scrollToSearch = () => {
   })
 }
 
-const handleSearch = async (searchData) => {
+const handleSearch = async (filters) => {
   searchLoading.value = true
   searchPerformed.value = true
-  selectedArea.value = searchData.area || ''
+  
+  // Store selected area for display
+  if (filters.serviceAreas && filters.serviceAreas.length) {
+    selectedArea.value = filters.serviceAreas.join(', ')
+  } else {
+    selectedArea.value = ''
+  }
 
   try {
-    // Filter companies based on search criteria
-    let filtered = [...companies.value]
-
-    // Filter by area if specified
-    if (searchData.area) {
-      filtered = helpers.findCompaniesByArea(filtered, searchData.area)
-    }
-
-    // Filter by availability if specified
-    if (searchData.availability && searchData.availability !== 'all') {
-      filtered = helpers.filterCompaniesByAvailability(filtered, searchData.availability)
-    }
-
-    // Filter by pricing tier if specified
-    if (searchData.pricingTier && searchData.pricingTier !== 'all') {
-      filtered = filtered.filter(company => 
-        company.services.pricingTier === searchData.pricingTier
-      )
-    }
-
-    // Filter by pickup frequency if specified
-    if (searchData.pickupFrequency && searchData.pickupFrequency !== 'all') {
-      filtered = filtered.filter(company => 
-        company.services.pickupFrequency.includes(searchData.pickupFrequency)
-      )
-    }
-
-    // Filter by waste types if specified
-    if (searchData.wasteTypes && searchData.wasteTypes.length > 0) {
-      filtered = filtered.filter(company => 
-        searchData.wasteTypes.some(type => 
-          company.services.wasteTypes.includes(type)
-        )
-      )
-    }
-
-    searchResults.value = filtered
+    // Use dataService to fetch filtered companies from Supabase
+    const companies = await dataService.getCompanies(filters)
+    searchResults.value = companies
   } catch (error) {
     console.error('Search error:', error)
     searchResults.value = []
@@ -259,28 +230,20 @@ const handleFilter = (filterData) => {
   handleSearch(filterData)
 }
 
-const getAreaName = (areaId) => {
-  const kecamatan = helpers.findKecamatanById(regions.kecamatan, areaId)
-  if (kecamatan) {
-    const kabupaten = regions.kabupaten.find(kab => kab.id === kecamatan.kabupatenId)
-    return `${kecamatan.name}, ${kabupaten?.name || ''}`
-  }
-  return areaId
+const getAreaName = (area) => {
+  return area || 'Area tidak diketahui'
 }
 
 // Load data on component mount
 onMounted(async () => {
   try {
-    // Load regions data
-    const regionsData = await loadRegionsData()
+    // Load regions data from JSON (still needed for search form)
+    const response = await fetch('/data/regions.json')
+    const regionsData = await response.json()
     regions.kabupaten = regionsData.kabupaten
     regions.kecamatan = regionsData.kecamatan
-
-    // Load companies data
-    const companiesData = await loadCompaniesData()
-    companies.value = companiesData.companies
   } catch (error) {
-    console.error('Error loading homepage data:', error)
+    console.error('Error loading regions data:', error)
   }
 })
 </script>

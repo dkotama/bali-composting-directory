@@ -114,9 +114,9 @@
 </template>
 
 <script setup>
-import { ref, reactive, computed, onMounted } from 'vue'
+import { ref, reactive, computed, onMounted, watch } from 'vue'
 import ProductCard from '../common/ProductCard.vue'
-import { loadProductsData } from '../../utils/dataLoader.js'
+import { dataService } from '../../utils/dataService.js'
 
 // Emits
 defineEmits(['navigate'])
@@ -131,72 +131,49 @@ const filters = reactive({
   location: ''
 })
 
-// Computed properties
-const filteredProducts = computed(() => {
-  let filtered = [...products.value]
-
-  // Filter by category
-  if (filters.category) {
-    filtered = filtered.filter(product => product.category === filters.category)
-  }
-
-  // Filter by price range
-  if (filters.priceRange) {
-    filtered = filtered.filter(product => {
-      if (!product.price || !product.price.range) return false
-      
-      const price = extractMinPrice(product.price.range)
-      
-      switch (filters.priceRange) {
-        case 'low':
-          return price < 100000
-        case 'medium':
-          return price >= 100000 && price <= 500000
-        case 'high':
-          return price > 500000
-        default:
-          return true
-      }
-    })
-  }
-
-  // Filter by location
-  if (filters.location) {
-    filtered = filtered.filter(product => 
-      product.vendor && 
-      product.vendor.location && 
-      product.vendor.location.toLowerCase().includes(filters.location.toLowerCase())
-    )
-  }
-
-  return filtered
-})
+// Computed properties - now shows all products since filtering is done by Supabase
+const filteredProducts = computed(() => products.value)
 
 // Methods
-const extractMinPrice = (priceRange) => {
-  if (!priceRange) return 0
-  
-  // Extract minimum price from range like "150000-250000"
-  const match = priceRange.match(/(\d+)/)
-  return match ? parseInt(match[1]) : 0
+const loadProducts = async () => {
+  loading.value = true
+  try {
+    // Build filters for dataService
+    const supabaseFilters = {}
+    
+    if (filters.category) {
+      supabaseFilters.category = filters.category
+    }
+    
+    if (filters.priceRange) {
+      supabaseFilters.priceRange = filters.priceRange
+    }
+    
+    const productsData = await dataService.getProducts(supabaseFilters)
+    products.value = productsData
+  } catch (error) {
+    console.error('Error loading products:', error)
+    products.value = []
+  } finally {
+    loading.value = false
+  }
 }
 
 const clearFilters = () => {
   filters.category = ''
   filters.priceRange = ''
   filters.location = ''
+  loadProducts() // Reload products without filters
 }
 
+// Watch filters and reload products when they change
+watch(filters, () => {
+  loadProducts()
+}, { deep: true })
+
 // Load products on mount
-onMounted(async () => {
-  try {
-    const productsData = await loadProductsData()
-    products.value = productsData.products
-  } catch (error) {
-    console.error('Error loading products:', error)
-  } finally {
-    loading.value = false
-  }
+onMounted(() => {
+  loadProducts()
 })
 </script>
 

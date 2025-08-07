@@ -162,7 +162,6 @@
 
 <script setup>
 import { ref, reactive, computed, onMounted } from 'vue'
-import { loadRegionsData } from '../../utils/dataLoader.js'
 
 // Props
 const props = defineProps({
@@ -193,10 +192,10 @@ const regions = reactive({
 })
 
 // Computed properties
-const kabupatenList = computed(() => regions.kabupaten)
+const kabupatenList = computed(() => regions.kabupaten || [])
 
 const filteredKecamatan = computed(() => {
-  if (!searchForm.kabupaten) return []
+  if (!searchForm.kabupaten || !regions.kecamatan) return []
   return regions.kecamatan.filter(kecamatan => 
     kecamatan.kabupatenId === searchForm.kabupaten
   )
@@ -220,16 +219,38 @@ const onKabupatenChange = () => {
 }
 
 const performSearch = () => {
-  const searchData = {
-    kabupaten: searchForm.kabupaten,
-    area: searchForm.area,
-    availability: searchForm.availability,
-    pricingTier: searchForm.pricingTier,
-    pickupFrequency: searchForm.pickupFrequency,
-    wasteTypes: [...searchForm.wasteTypes]
+  // Convert form data to format expected by dataService
+  const filters = {}
+  
+  // Service areas (combine kabupaten and area)
+  const serviceAreas = []
+  if (searchForm.kabupaten) {
+    const selectedKabupaten = regions.kabupaten.find(k => k.id === searchForm.kabupaten)
+    if (selectedKabupaten) serviceAreas.push(selectedKabupaten.name)
+  }
+  if (searchForm.area) {
+    const selectedArea = regions.kecamatan.find(k => k.id === searchForm.area)
+    if (selectedArea) serviceAreas.push(selectedArea.name)
+  }
+  if (serviceAreas.length) {
+    filters.serviceAreas = serviceAreas
   }
   
-  emit('search', searchData)
+  // Other filters
+  if (searchForm.availability !== 'all') {
+    filters.availability = searchForm.availability
+  }
+  if (searchForm.pricingTier !== 'all') {
+    filters.pricingTier = searchForm.pricingTier
+  }
+  if (searchForm.pickupFrequency !== 'all') {
+    filters.pickupFrequency = [searchForm.pickupFrequency]
+  }
+  if (searchForm.wasteTypes.length) {
+    filters.wasteTypes = searchForm.wasteTypes
+  }
+  
+  emit('search', filters)
 }
 
 const clearFilters = () => {
@@ -245,7 +266,9 @@ const clearFilters = () => {
 // Load data on mount
 onMounted(async () => {
   try {
-    const regionsData = await loadRegionsData()
+    // Load regions data from JSON (still needed for form dropdowns)
+    const response = await fetch('/data/regions.json')
+    const regionsData = await response.json()
     regions.kabupaten = regionsData.kabupaten
     regions.kecamatan = regionsData.kecamatan
   } catch (error) {

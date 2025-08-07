@@ -22,19 +22,19 @@
               <div class="col-auto">
                 <small class="badge bg-light text-dark">
                   <i class="fas fa-calendar-alt me-1"></i>
-                  {{ formatPickupFrequency(company.services.pickupFrequency) }}
+                  {{ formatPickupFrequency(company.pickup_frequency) }}
                 </small>
               </div>
               <div class="col-auto">
                 <small class="badge bg-light text-dark">
                   <i class="fas fa-leaf me-1"></i>
-                  {{ formatWasteTypes(company.services.wasteTypes) }}
+                  {{ formatWasteTypes(company.waste_types) }}
                 </small>
               </div>
               <div class="col-auto">
                 <small class="badge bg-light text-dark">
                   <i class="fas fa-tag me-1"></i>
-                  {{ formatPricingTier(company.services.pricingTier) }}
+                  {{ formatPricingTier(company.pricing_tier) }}
                 </small>
               </div>
             </div>
@@ -48,11 +48,11 @@
             </h6>
             <div class="d-flex flex-wrap gap-1">
               <span 
-                v-for="areaId in company.serviceAreas" 
-                :key="areaId"
+                v-for="area in company.service_areas" 
+                :key="area"
                 class="badge bg-primary-green"
               >
-                {{ getAreaName(areaId) }}
+                {{ area }}
               </span>
             </div>
           </div>
@@ -76,15 +76,27 @@
         <div class="col-md-4">
           <div class="contact-section">
             <!-- Pricing Info -->
-            <div class="pricing-info mb-3" v-if="company.pricing">
+            <div class="pricing-info mb-3" v-if="company.price_weekly || company.price_bi_weekly || company.price_monthly">
               <h6 class="mb-2">
                 <i class="fas fa-money-bill-wave me-1 text-primary-green"></i>
                 Harga:
               </h6>
-              <div v-for="(price, frequency) in company.pricing" :key="frequency" class="mb-1">
+              <div v-if="company.price_weekly" class="mb-1">
                 <small class="text-muted">
-                  {{ formatFrequency(frequency) }}: 
-                  <span class="fw-bold text-primary-green">{{ formatCurrency(price) }}</span>
+                  Mingguan: 
+                  <span class="fw-bold text-primary-green">{{ formatCurrency(company.price_weekly) }}</span>
+                </small>
+              </div>
+              <div v-if="company.price_bi_weekly" class="mb-1">
+                <small class="text-muted">
+                  2 Minggu: 
+                  <span class="fw-bold text-primary-green">{{ formatCurrency(company.price_bi_weekly) }}</span>
+                </small>
+              </div>
+              <div v-if="company.price_monthly" class="mb-1">
+                <small class="text-muted">
+                  Bulanan: 
+                  <span class="fw-bold text-primary-green">{{ formatCurrency(company.price_monthly) }}</span>
                 </small>
               </div>
             </div>
@@ -97,16 +109,16 @@
                   Didirikan {{ company.established }}
                 </small>
               </div>
-              <div v-if="company.capacity" class="mb-2">
+              <div v-if="company.customer_capacity" class="mb-2">
                 <small class="text-muted">
                   <i class="fas fa-users me-1"></i>
-                  Kapasitas: {{ company.capacity }}
+                  Kapasitas: {{ company.customer_capacity }} pelanggan
                 </small>
               </div>
-              <div v-if="company.services.minAmount && company.services.maxAmount" class="mb-2">
+              <div v-if="company.waste_capacity" class="mb-2">
                 <small class="text-muted">
                   <i class="fas fa-weight me-1"></i>
-                  {{ company.services.minAmount }} - {{ company.services.maxAmount }}
+                  Kapasitas sampah: {{ company.waste_capacity }}
                 </small>
               </div>
             </div>
@@ -120,8 +132,8 @@
               
               <!-- WhatsApp Button -->
               <a 
-                v-if="company.contact.whatsapp"
-                :href="generateWhatsAppUrl(company.contact.whatsapp)"
+                v-if="company.whatsapp"
+                :href="generateWhatsAppUrl(company.whatsapp)"
                 target="_blank"
                 class="contact-btn whatsapp-btn d-block mb-2"
                 @click="trackContactClick('whatsapp', company.id)"
@@ -132,8 +144,8 @@
 
               <!-- Instagram Button -->
               <a 
-                v-if="company.contact.instagram"
-                :href="generateInstagramUrl(company.contact.instagram)"
+                v-if="company.instagram"
+                :href="generateInstagramUrl(company.instagram)"
                 target="_blank"
                 class="contact-btn instagram-btn d-block mb-2"
                 @click="trackContactClick('instagram', company.id)"
@@ -144,8 +156,8 @@
 
               <!-- Phone Button -->
               <a 
-                v-if="company.contact.phone && company.contact.phone !== company.contact.whatsapp"
-                :href="`tel:${company.contact.phone}`"
+                v-if="company.phone && company.phone !== company.whatsapp"
+                :href="`tel:${company.phone}`"
                 class="contact-btn btn btn-outline-primary d-block mb-2"
               >
                 <i class="fas fa-phone me-2"></i>
@@ -154,8 +166,8 @@
 
               <!-- Email Button -->
               <a 
-                v-if="company.contact.email"
-                :href="`mailto:${company.contact.email}`"
+                v-if="company.email"
+                :href="`mailto:${company.email}`"
                 class="contact-btn btn btn-outline-secondary d-block"
               >
                 <i class="fas fa-envelope me-2"></i>
@@ -171,7 +183,6 @@
 
 <script setup>
 import { computed } from 'vue'
-import { helpers } from '../../utils/dataLoader.js'
 
 // Props
 const props = defineProps({
@@ -246,18 +257,19 @@ const formatFrequency = (frequency) => {
 }
 
 const formatCurrency = (amount) => {
-  return helpers.formatCurrency(amount)
+  return new Intl.NumberFormat('id-ID', {
+    style: 'currency',
+    currency: 'IDR',
+    minimumFractionDigits: 0,
+    maximumFractionDigits: 0
+  }).format(amount)
 }
 
-const getAreaName = (areaId) => {
-  // Simple implementation - in real app would use regions data
-  const parts = areaId.split('-')
-  return parts.length > 1 ? parts.slice(1).join(' ').replace(/([a-z])([A-Z])/g, '$1 $2') : areaId
-}
-
-const generateWhatsAppUrl = (phoneNumber) => {
-  const message = `Halo ${props.company.name}, saya tertarik dengan layanan komposting Anda. Bisa informasi lebih lanjut?`
-  return helpers.generateWhatsAppUrl(phoneNumber, message)
+const generateWhatsAppUrl = (phoneNumber, message = '') => {
+  const cleanPhone = phoneNumber.replace(/\D/g, '')
+  const defaultMessage = message || `Halo ${props.company.name}, saya tertarik dengan layanan komposting Anda. Bisa informasi lebih lanjut?`
+  const encodedMessage = encodeURIComponent(defaultMessage)
+  return `https://wa.me/${cleanPhone}?text=${encodedMessage}`
 }
 
 const generateInstagramUrl = (instagram) => {

@@ -69,7 +69,7 @@
       <div class="price-section mb-3">
         <div class="price-display">
           <span class="price-label">Harga:</span>
-          <span class="price-value">{{ formatPriceRange(product.price) }}</span>
+          <span class="price-value">{{ formatPrice(product) }}</span>
         </div>
       </div>
 
@@ -77,11 +77,11 @@
       <div class="vendor-info mb-3">
         <div class="d-flex justify-content-between align-items-center">
           <div>
-            <small class="vendor-name fw-bold">{{ product.vendor.name }}</small>
+            <small class="vendor-name fw-bold">{{ product.vendor_name }}</small>
             <br>
             <small class="text-muted">
               <i class="fas fa-map-marker-alt me-1"></i>
-              {{ product.vendor.location }}
+              {{ formatShippingAreas(product.shipping_areas) }}
             </small>
           </div>
         </div>
@@ -91,8 +91,8 @@
       <div class="contact-buttons mt-auto">
         <!-- WhatsApp -->
         <a 
-          v-if="product.vendor.contact.whatsapp"
-          :href="generateWhatsAppUrl(product.vendor.contact.whatsapp)"
+          v-if="product.vendor_whatsapp"
+          :href="generateWhatsAppUrl(product.vendor_whatsapp)"
           target="_blank"
           class="btn btn-success btn-sm w-100 mb-2"
           @click="trackProductClick('whatsapp', product.id)"
@@ -104,8 +104,8 @@
         <!-- E-commerce Links -->
         <div class="ecommerce-links">
           <a 
-            v-if="product.vendor.contact.tokopedia"
-            :href="product.vendor.contact.tokopedia"
+            v-if="product.vendor_tokopedia"
+            :href="product.vendor_tokopedia"
             target="_blank"
             class="btn btn-outline-success btn-sm me-1 flex-fill"
             @click="trackProductClick('tokopedia', product.id)"
@@ -114,8 +114,8 @@
           </a>
           
           <a 
-            v-if="product.vendor.contact.shopee"
-            :href="product.vendor.contact.shopee"
+            v-if="product.vendor_shopee"
+            :href="product.vendor_shopee"
             target="_blank"
             class="btn btn-outline-warning btn-sm me-1 flex-fill"
             @click="trackProductClick('shopee', product.id)"
@@ -124,8 +124,8 @@
           </a>
           
           <a 
-            v-if="product.vendor.contact.bukalapak"
-            :href="product.vendor.contact.bukalapak"
+            v-if="product.vendor_bukalapak"
+            :href="product.vendor_bukalapak"
             target="_blank"
             class="btn btn-outline-info btn-sm flex-fill"
             @click="trackProductClick('bukalapak', product.id)"
@@ -136,8 +136,8 @@
 
         <!-- Instagram -->
         <a 
-          v-if="product.vendor.contact.instagram"
-          :href="generateInstagramUrl(product.vendor.contact.instagram)"
+          v-if="product.vendor_instagram"
+          :href="generateInstagramUrl(product.vendor_instagram)"
           target="_blank"
           class="btn btn-outline-primary btn-sm w-100 mt-2"
           @click="trackProductClick('instagram', product.id)"
@@ -152,7 +152,6 @@
 
 <script setup>
 import { computed } from 'vue'
-import { helpers } from '../../utils/dataLoader.js'
 
 // Props
 const props = defineProps({
@@ -192,16 +191,29 @@ const formatCategory = (category) => {
   return categoryMap[category] || category
 }
 
-const formatPriceRange = (price) => {
-  if (!price || !price.range) return 'Hubungi Vendor'
-  
-  const range = price.range
-  if (range.includes('-')) {
-    const [min, max] = range.split('-')
-    return `Rp ${helpers.formatCurrency(parseInt(min)).replace('Rp', '')} - ${helpers.formatCurrency(parseInt(max))}`
+const formatPrice = (product) => {
+  if (product.price_min && product.price_max) {
+    return `${formatCurrency(product.price_min)} - ${formatCurrency(product.price_max)}`
+  } else if (product.price_min) {
+    return `Mulai ${formatCurrency(product.price_min)}`
+  } else if (product.price_range === 'contact') {
+    return 'Hubungi Vendor'
   }
-  
-  return helpers.formatCurrency(parseInt(range))
+  return 'Harga tidak tersedia'
+}
+
+const formatCurrency = (amount) => {
+  return new Intl.NumberFormat('id-ID', {
+    style: 'currency',
+    currency: 'IDR',
+    minimumFractionDigits: 0,
+    maximumFractionDigits: 0
+  }).format(amount)
+}
+
+const formatShippingAreas = (areas) => {
+  if (!areas || !areas.length) return 'Seluruh Indonesia'
+  return areas.join(', ')
 }
 
 const truncateText = (text, length) => {
@@ -210,8 +222,10 @@ const truncateText = (text, length) => {
 }
 
 const generateWhatsAppUrl = (phoneNumber) => {
+  const cleanPhone = phoneNumber.replace(/\D/g, '')
   const message = `Halo, saya tertarik dengan produk ${props.product.name}. Bisa informasi lebih lanjut?`
-  return helpers.generateWhatsAppUrl(phoneNumber, message)
+  const encodedMessage = encodeURIComponent(message)
+  return `https://wa.me/${cleanPhone}?text=${encodedMessage}`
 }
 
 const generateInstagramUrl = (instagram) => {

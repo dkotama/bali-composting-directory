@@ -20,6 +20,9 @@
             <li class="nav-item">
               <a class="nav-link" href="#daftar-perusahaan" @click="currentPage = 'company-form'">Daftar Perusahaan</a>
             </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#tambah-produk" @click="currentPage = 'product-form'">Tambah Produk</a>
+            </li>
           </ul>
         </div>
       </div>
@@ -35,6 +38,9 @@
       
       <!-- Company Form Page -->
       <CompanyFormPage v-if="currentPage === 'company-form'" @navigate="handleNavigation" />
+      
+      <!-- Product Form Page -->
+      <ProductFormPage v-if="currentPage === 'product-form'" @navigate="handleNavigation" />
     </main>
 
     <!-- Footer -->
@@ -61,6 +67,7 @@ import { ref } from 'vue'
 import HomePage from './pages/HomePage.vue'
 import HowToPage from './pages/HowToPage.vue'
 import CompanyFormPage from './pages/CompanyFormPage.vue'
+import ProductFormPage from './pages/ProductFormPage.vue'
 
 // Reactive data
 const currentPage = ref('home')
@@ -74,7 +81,7 @@ const handleNavigation = (page) => {
     'home': 'home',
     'howto': 'howto',
     'company-form': 'company-form',
-    'product-form': 'company-form', // Redirect to company form for now
+    'product-form': 'product-form',
     'products': 'howto', // Redirect to howto page with products tab
     'calculator': 'howto', // Redirect to howto page with calculator tab
   }
