@@ -1,0 +1,343 @@
+{
+  "kabupaten": [
+    {
+      "id": "badung",
+      "name": "Badung",
+      "kecamatan": [
+        {
+          "id": "badung-kuta",
+          "name": "Kuta",
+          "kabupatenId": "badung"
+        },
+        {
+          "id": "badung-mengwi",
+          "name": "Mengwi",
+          "kabupatenId": "badung"
+        },
+        {
+          "id": "badung-abiansemal",
+          "name": "Abiansemal",
+          "kabupatenId": "badung"
+        },
+        {
+          "id": "badung-petang",
+          "name": "Petang",
+          "kabupatenId": "badung"
+        },
+        {
+          "id": "badung-kutaselatan",
+          "name": "Kuta Selatan",
+          "kabupatenId": "badung"
+        },
+        {
+          "id": "badung-kutautara",
+          "name": "Kuta Utara",
+          "kabupatenId": "badung"
+        }
+      ]
+    },
+    {
+      "id": "denpasar",
+      "name": "Denpasar",
+      "kecamatan": [
+        {
+          "id": "denpasar-denpasarselatan",
+          "name": "Denpasar Selatan",
+          "kabupatenId": "denpasar"
+        },
+        {
+          "id": "denpasar-denpasartimur",
+          "name": "Denpasar Timur",
+          "kabupatenId": "denpasar"
+        },
+        {
+          "id": "denpasar-denpasarbarat",
+          "name": "Denpasar Barat",
+          "kabupatenId": "denpasar"
+        },
+        {
+          "id": "denpasar-denpasarutara",
+          "name": "Denpasar Utara",
+          "kabupatenId": "denpasar"
+        }
+      ]
+    },
+    {
+      "id": "gianyar",
+      "name": "Gianyar",
+      "kecamatan": [
+        {
+          "id": "gianyar-sukawati",
+          "name": "Sukawati",
+          "kabupatenId": "gianyar"
+        },
+        {
+          "id": "gianyar-blahbatuh",
+          "name": "Blahbatuh",
+          "kabupatenId": "gianyar"
+        },
+        {
+          "id": "gianyar-gianyar",
+          "name": "Gianyar",
+          "kabupatenId": "gianyar"
+        },
+        {
+          "id": "gianyar-tampaksiring",
+          "name": "Tampaksiring",
+          "kabupatenId": "gianyar"
+        },
+        {
+          "id": "gianyar-ubud",
+          "name": "Ubud",
+          "kabupatenId": "gianyar"
+        },
+        {
+          "id": "gianyar-tegallalang",
+          "name": "Tegallalang",
+          "kabupatenId": "gianyar"
+        },
+        {
+          "id": "gianyar-payangan",
+          "name": "Payangan",
+          "kabupatenId": "gianyar"
+        }
+      ]
+    },
+    {
+      "id": "tabanan",
+      "name": "Tabanan",
+      "kecamatan": [
+        {
+          "id": "tabanan-kediri",
+          "name": "Kediri",
+          "kabupatenId": "tabanan"
+        },
+        {
+          "id": "tabanan-tabanan",
+          "name": "Tabanan",
+          "kabupatenId": "tabanan"
+        },
+        {
+          "id": "tabanan-krambitan",
+          "name": "Krambitan",
+          "kabupatenId": "tabanan"
+        },
+        {
+          "id": "tabanan-selemadeg",
+          "name": "Selemadeg",
+          "kabupatenId": "tabanan"
+        },
+        {
+          "id": "tabanan-kerambitan",
+          "name": "Kerambitan",
+          "kabupatenId": "tabanan"
+        },
+        {
+          "id": "tabanan-marga",
+          "name": "Marga",
+          "kabupatenId": "tabanan"
+        },
+        {
+          "id": "tabanan-baturiti",
+          "name": "Baturiti",
+          "kabupatenId": "tabanan"
+        },
+        {
+          "id": "tabanan-penebel",
+          "name": "Penebel",
+          "kabupatenId": "tabanan"
+        },
+        {
+          "id": "tabanan-pupuan",
+          "name": "Pupuan",
+          "kabupatenId": "tabanan"
+        },
+        {
+          "id": "tabanan-selemadegbarat",
+          "name": "Selemadeg Barat",
+          "kabupatenId": "tabanan"
+        }
+      ]
+    },
+    {
+      "id": "klungkung",
+      "name": "Klungkung",
+      "kecamatan": [
+        {
+          "id": "klungkung-semarapura",
+          "name": "Semarapura",
+          "kabupatenId": "klungkung"
+        },
+        {
+          "id": "klungkung-dawan",
+          "name": "Dawan",
+          "kabupatenId": "klungkung"
+        },
+        {
+          "id": "klungkung-klungkung",
+          "name": "Klungkung",
+          "kabupatenId": "klungkung"
+        },
+        {
+          "id": "klungkung-banjarangkan",
+          "name": "Banjarangkan",
+          "kabupatenId": "klungkung"
+        }
+      ]
+    },
+    {
+      "id": "bangli",
+      "name": "Bangli",
+      "kecamatan": [
+        {
+          "id": "bangli-susut",
+          "name": "Susut",
+          "kabupatenId": "bangli"
+        },
+        {
+          "id": "bangli-bangli",
+          "name": "Bangli",
+          "kabupatenId": "bangli"
+        },
+        {
+          "id": "bangli-tembuku",
+          "name": "Tembuku",
+          "kabupatenId": "bangli"
+        },
+        {
+          "id": "bangli-kintamani",
+          "name": "Kintamani",
+          "kabupatenId": "bangli"
+        }
+      ]
+    },
+    {
+      "id": "karangasem",
+      "name": "Karangasem",
+      "kecamatan": [
+        {
+          "id": "karangasem-rendang",
+          "name": "Rendang",
+          "kabupatenId": "karangasem"
+        },
+        {
+          "id": "karangasem-sidemen",
+          "name": "Sidemen",
+          "kabupatenId": "karangasem"
+        },
+        {
+          "id": "karangasem-manggis",
+          "name": "Manggis",
+          "kabupatenId": "karangasem"
+        },
+        {
+          "id": "karangasem-karangasem",
+          "name": "Karangasem",
+          "kabupatenId": "karangasem"
+        },
+        {
+          "id": "karangasem-abang",
+          "name": "Abang",
+          "kabupatenId": "karangasem"
+        },
+        {
+          "id": "karangasem-bebandem",
+          "name": "Bebandem",
+          "kabupatenId": "karangasem"
+        },
+        {
+          "id": "karangasem-selat",
+          "name": "Selat",
+          "kabupatenId": "karangasem"
+        },
+        {
+          "id": "karangasem-kubu",
+          "name": "Kubu",
+          "kabupatenId": "karangasem"
+        }
+      ]
+    },
+    {
+      "id": "buleleng",
+      "name": "Buleleng",
+      "kecamatan": [
+        {
+          "id": "buleleng-gerokgak",
+          "name": "Gerokgak",
+          "kabupatenId": "buleleng"
+        },
+        {
+          "id": "buleleng-seririt",
+          "name": "Seririt",
+          "kabupatenId": "buleleng"
+        },
+        {
+          "id": "buleleng-busungbiu",
+          "name": "Busungbiu",
+          "kabupatenId": "buleleng"
+        },
+        {
+          "id": "buleleng-banjar",
+          "name": "Banjar",
+          "kabupatenId": "buleleng"
+        },
+        {
+          "id": "buleleng-sukasada",
+          "name": "Sukasada",
+          "kabupatenId": "buleleng"
+        },
+        {
+          "id": "buleleng-buleleng",
+          "name": "Buleleng",
+          "kabupatenId": "buleleng"
+        },
+        {
+          "id": "buleleng-sawan",
+          "name": "Sawan",
+          "kabupatenId": "buleleng"
+        },
+        {
+          "id": "buleleng-kubutambahan",
+          "name": "Kubutambahan",
+          "kabupatenId": "buleleng"
+        },
+        {
+          "id": "buleleng-tejakula",
+          "name": "Tejakula",
+          "kabupatenId": "buleleng"
+        }
+      ]
+    },
+    {
+      "id": "jembrana",
+      "name": "Jembrana",
+      "kecamatan": [
+        {
+          "id": "jembrana-melaya",
+          "name": "Melaya",
+          "kabupatenId": "jembrana"
+        },
+        {
+          "id": "jembrana-jembrana",
+          "name": "Jembrana",
+          "kabupatenId": "jembrana"
+        },
+        {
+          "id": "jembrana-mendoyo",
+          "name": "Mendoyo",
+          "kabupatenId": "jembrana"
+        },
+        {
+          "id": "jembrana-pekutatan",
+          "name": "Pekutatan",
+          "kabupatenId": "jembrana"
+        },
+        {
+          "id": "jembrana-negara",
+          "name": "Negara",
+          "kabupatenId": "jembrana"
+        }
+      ]
+    }
+  ]
+}

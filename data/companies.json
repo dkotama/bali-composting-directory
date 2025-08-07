@@ -1,0 +1,164 @@
+{
+  "companies": [
+    {
+      "id": "company-001",
+      "name": "Bali Composting Solutions",
+      "description": "Layanan komposting profesional dengan pengalaman 5+ tahun melayani wilayah Badung dan Denpasar.",
+      "serviceAreas": ["badung-kuta", "badung-kutaselatan", "denpasar-denpasarselatan"],
+      "services": {
+        "pickupFrequency": ["weekly", "bi-weekly"],
+        "wasteTypes": ["organic", "garden", "food-waste"],
+        "pricingTier": "medium",
+        "minAmount": "5kg/minggu",
+        "maxAmount": "50kg/minggu"
+      },
+      "availability": "accepting",
+      "contact": {
+        "phone": "+6281234567890",
+        "whatsapp": "+6281234567890",
+        "instagram": "@balicompostingsolutions",
+        "email": "info@balicomposting.com"
+      },
+      "features": [
+        "Penjemputan rutin sesuai jadwal",
+        "Laporan hasil kompos bulanan",
+        "Edukasi pemilahan sampah",
+        "Layanan konsultasi gratis"
+      ],
+      "pricing": {
+        "weekly": "150000",
+        "bi-weekly": "100000"
+      },
+      "established": "2019",
+      "capacity": "100 rumah tangga/bulan"
+    },
+    {
+      "id": "company-002", 
+      "name": "Green Cycle Bali",
+      "description": "Perusahaan komposting ramah lingkungan yang fokus pada edukasi masyarakat dan pengelolaan sampah organik.",
+      "serviceAreas": ["gianyar-ubud", "gianyar-tegallalang", "gianyar-payangan"],
+      "services": {
+        "pickupFrequency": ["weekly", "monthly"],
+        "wasteTypes": ["organic", "garden"],
+        "pricingTier": "low",
+        "minAmount": "3kg/minggu",
+        "maxAmount": "30kg/minggu"
+      },
+      "availability": "waitlist",
+      "contact": {
+        "phone": "+6281987654321",
+        "whatsapp": "+6281987654321",
+        "instagram": "@greencyclebali",
+        "email": "hello@greencyclebali.id"
+      },
+      "features": [
+        "Workshop komposting gratis",
+        "Program edukasi sekolah",
+        "Kompos berkualitas tinggi",
+        "Sistem tracking digital"
+      ],
+      "pricing": {
+        "weekly": "120000",
+        "monthly": "50000"
+      },
+      "established": "2020",
+      "capacity": "150 rumah tangga/bulan"
+    },
+    {
+      "id": "company-003",
+      "name": "Eco Waste Bali",
+      "description": "Spesialis pengolahan limbah organik dengan teknologi komposting modern dan ramah lingkungan.",
+      "serviceAreas": ["tabanan-tabanan", "tabanan-kediri", "tabanan-kerambitan"],
+      "services": {
+        "pickupFrequency": ["weekly", "bi-weekly", "monthly"],
+        "wasteTypes": ["organic", "garden", "food-waste", "restaurant-waste"],
+        "pricingTier": "high",
+        "minAmount": "10kg/minggu",
+        "maxAmount": "100kg/minggu"
+      },
+      "availability": "accepting",
+      "contact": {
+        "phone": "+6281122334455",
+        "whatsapp": "+6281122334455",
+        "instagram": "@ecowastebali",
+        "email": "service@ecowastebali.com"
+      },
+      "features": [
+        "Teknologi komposting canggih",
+        "Layanan khusus restoran & hotel",
+        "Sertifikat kompos organik",
+        "Konsultasi pengelolaan limbah",
+        "Pickup emergency tersedia"
+      ],
+      "pricing": {
+        "weekly": "200000",
+        "bi-weekly": "150000",
+        "monthly": "80000"
+      },
+      "established": "2018",
+      "capacity": "200 rumah tangga/bulan"
+    },
+    {
+      "id": "company-004",
+      "name": "Bumi Hijau Composting",
+      "description": "Komunitas komposting lokal yang memberikan layanan terjangkau untuk wilayah Buleleng.",
+      "serviceAreas": ["buleleng-buleleng", "buleleng-sukasada", "buleleng-banjar"],
+      "services": {
+        "pickupFrequency": ["bi-weekly", "monthly"],
+        "wasteTypes": ["organic", "garden"],
+        "pricingTier": "low",
+        "minAmount": "2kg/minggu", 
+        "maxAmount": "25kg/minggu"
+      },
+      "availability": "accepting",
+      "contact": {
+        "phone": "+6281567890123",
+        "whatsapp": "+6281567890123",
+        "instagram": "@bumihijaucompost"
+      },
+      "features": [
+        "Harga terjangkau",
+        "Dikelola komunitas lokal",
+        "Program barter kompos",
+        "Edukasi berkelanjutan"
+      ],
+      "pricing": {
+        "bi-weekly": "75000",
+        "monthly": "45000"
+      },
+      "established": "2021",
+      "capacity": "80 rumah tangga/bulan"
+    },
+    {
+      "id": "company-005",
+      "name": "Karangasem Organic Cycle",
+      "description": "Layanan komposting berbasis komunitas yang melayani wilayah Karangasem dengan pendekatan tradisional modern.",
+      "serviceAreas": ["karangasem-karangasem", "karangasem-sidemen", "karangasem-manggis"],
+      "services": {
+        "pickupFrequency": ["weekly", "monthly"],
+        "wasteTypes": ["organic", "garden", "agricultural-waste"],
+        "pricingTier": "medium",
+        "minAmount": "5kg/minggu",
+        "maxAmount": "40kg/minggu"
+      },
+      "availability": "full",
+      "contact": {
+        "phone": "+6281678901234",
+        "whatsapp": "+6281678901234",
+        "instagram": "@karangasemorganic"
+      },
+      "features": [
+        "Metode komposting tradisional",
+        "Kerjasama petani lokal",
+        "Kompos khusus pertanian",
+        "Program CSR perusahaan"
+      ],
+      "pricing": {
+        "weekly": "130000",
+        "monthly": "60000"
+      },
+      "established": "2020",
+      "capacity": "120 rumah tangga/bulan"
+    }
+  ]
+}

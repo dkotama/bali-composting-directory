@@ -1,0 +1,235 @@
+{
+  "products": [
+    {
+      "id": "product-001",
+      "name": "Komposter Bin Plastik 100L",
+      "category": "equipment",
+      "description": "Komposter rumahan berbahan plastik berkualitas tinggi dengan kapasitas 100 liter. Cocok untuk keluarga 4-6 orang.",
+      "features": [
+        "Kapasitas 100 liter",
+        "Bahan plastik food grade",
+        "Sistem ventilasi optimal",
+        "Mudah dibersihkan",
+        "Tahan cuaca tropis"
+      ],
+      "price": {
+        "range": "500000-750000",
+        "currency": "IDR"
+      },
+      "vendor": {
+        "name": "Bali Eco Products",
+        "location": "Denpasar",
+        "contact": {
+          "whatsapp": "+6281234560001",
+          "instagram": "@baliecoproducts",
+          "tokopedia": "https://tokopedia.com/baliecoproducts",
+          "shopee": "https://shopee.co.id/baliecoproducts"
+        }
+      },
+      "availability": "in-stock",
+      "rating": 4.5,
+      "soldCount": 150
+    },
+    {
+      "id": "product-002",
+      "name": "Biopore Kit Lengkap",
+      "category": "equipment",
+      "description": "Kit lengkap untuk membuat biopore di halaman rumah, termasuk bor biopore dan panduan instalasi.",
+      "features": [
+        "Bor biopore diameter 10cm",
+        "Pipa PVC 30cm",
+        "Tutup biopore",
+        "Panduan instalasi lengkap",
+        "Video tutorial"
+      ],
+      "price": {
+        "range": "200000-300000",
+        "currency": "IDR"
+      },
+      "vendor": {
+        "name": "Green Tools Bali",
+        "location": "Ubud",
+        "contact": {
+          "whatsapp": "+6281234560002",
+          "instagram": "@greentoolsbali",
+          "bukalapak": "https://bukalapak.com/greentoolsbali"
+        }
+      },
+      "availability": "in-stock",
+      "rating": 4.3,
+      "soldCount": 89
+    },
+    {
+      "id": "product-003",
+      "name": "Aktivator Kompos Organik 1kg",
+      "category": "supplies",
+      "description": "Aktivator kompos alami untuk mempercepat proses pengomposan. Terbuat dari mikroorganisme lokal Bali.",
+      "features": [
+        "Berat 1kg",
+        "100% bahan organik",
+        "Mikroorganisme lokal Bali",
+        "Mempercepat proses kompos 2-3x",
+        "Ramah lingkungan"
+      ],
+      "price": {
+        "range": "75000-100000",
+        "currency": "IDR"
+      },
+      "vendor": {
+        "name": "Bali Organic Supplies",
+        "location": "Gianyar",
+        "contact": {
+          "whatsapp": "+6281234560003",
+          "instagram": "@baliorganicsupplies",
+          "tokopedia": "https://tokopedia.com/baliorganicsupplies"
+        }
+      },
+      "availability": "in-stock",
+      "rating": 4.7,
+      "soldCount": 234
+    },
+    {
+      "id": "product-004",
+      "name": "Ember Komposter 20L",
+      "category": "equipment",
+      "description": "Ember komposter kecil untuk apartemen atau rumah dengan halaman terbatas. Sistem bokashi terintegrasi.",
+      "features": [
+        "Kapasitas 20 liter",
+        "Sistem bokashi",
+        "Tutup kedap udara",
+        "Kran pembuangan cairan",
+        "Compact dan portable"
+      ],
+      "price": {
+        "range": "150000-250000",
+        "currency": "IDR"
+      },
+      "vendor": {
+        "name": "Urban Garden Bali",
+        "location": "Sanur",
+        "contact": {
+          "whatsapp": "+6281234560004",
+          "instagram": "@urbangardenbali",
+          "shopee": "https://shopee.co.id/urbangardenbali"
+        }
+      },
+      "availability": "in-stock",
+      "rating": 4.4,
+      "soldCount": 67
+    },
+    {
+      "id": "product-005",
+      "name": "Sekam Bakar 5kg",
+      "category": "supplies",
+      "description": "Sekam bakar berkualitas tinggi untuk campuran media kompos. Meningkatkan aerasi dan drainase.",
+      "features": [
+        "Berat 5kg",
+        "Sekam padi lokal Bali",
+        "Proses pembakaran terkontrol",
+        "Meningkatkan porositas tanah",
+        "pH netral"
+      ],
+      "price": {
+        "range": "25000-40000",
+        "currency": "IDR"
+      },
+      "vendor": {
+        "name": "Petani Sejahtera Bali",
+        "location": "Tabanan",
+        "contact": {
+          "whatsapp": "+6281234560005",
+          "instagram": "@petanisejahtera"
+        }
+      },
+      "availability": "in-stock",
+      "rating": 4.6,
+      "soldCount": 178
+    },
+    {
+      "id": "product-006",
+      "name": "Termometer Kompos Digital",
+      "category": "tools",
+      "description": "Termometer digital khusus untuk mengukur suhu kompos. Membantu memantau proses pengomposan.",
+      "features": [
+        "Display digital LCD",
+        "Probe stainless steel 30cm",
+        "Range suhu 0-100°C",
+        "Akurasi ±1°C",
+        "Baterai tahan lama"
+      ],
+      "price": {
+        "range": "120000-180000",
+        "currency": "IDR"
+      },
+      "vendor": {
+        "name": "Tech Garden Indonesia",
+        "location": "Jakarta (Kirim ke Bali)",
+        "contact": {
+          "whatsapp": "+6281234560006",
+          "tokopedia": "https://tokopedia.com/techgarden",
+          "lazada": "https://lazada.co.id/techgarden"
+        }
+      },
+      "availability": "in-stock",
+      "rating": 4.2,
+      "soldCount": 43
+    },
+    {
+      "id": "product-007",
+      "name": "Bibit Cacing Tanah Kompos 500g",
+      "category": "supplies",
+      "description": "Bibit cacing tanah untuk vermikompos. Cacing lokal Bali yang sudah teradaptasi dengan iklim tropis.",
+      "features": [
+        "Berat 500g (~200-300 ekor)",
+        "Cacing lokal Bali",
+        "Sudah dewasa siap produksi",
+        "Adaptasi iklim tropis",
+        "Panduan pemeliharaan"
+      ],
+      "price": {
+        "range": "80000-120000",
+        "currency": "IDR"
+      },
+      "vendor": {
+        "name": "Cacing Bali Farm",
+        "location": "Klungkung",
+        "contact": {
+          "whatsapp": "+6281234560007",
+          "instagram": "@cacingbalifarm"
+        }
+      },
+      "availability": "limited-stock",
+      "rating": 4.8,
+      "soldCount": 95
+    },
+    {
+      "id": "product-008",
+      "name": "Sarung Tangan Berkebun Anti Air",
+      "category": "tools",
+      "description": "Sarung tangan khusus berkebun dan komposting. Tahan air dan bahan kimia, nyaman digunakan.",
+      "features": [
+        "Bahan nitrile anti air",
+        "Grip tekstur non-slip",
+        "Tahan bahan kimia ringan",
+        "Ukuran S, M, L, XL",
+        "Mudah dicuci"
+      ],
+      "price": {
+        "range": "35000-50000",
+        "currency": "IDR"
+      },
+      "vendor": {
+        "name": "Garden Tools Bali",
+        "location": "Badung",
+        "contact": {
+          "whatsapp": "+6281234560008",
+          "instagram": "@gardentoolsbali",
+          "bukalapak": "https://bukalapak.com/gardentoolsbali"
+        }
+      },
+      "availability": "in-stock",
+      "rating": 4.1,
+      "soldCount": 112
+    }
+  ]
+}
