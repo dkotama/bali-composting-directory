@@ -1,217 +1,272 @@
-# Netlify Deployment Guide
+# Cloudflare Pages Deployment Guide
 
 ## Overview
-This guide covers the complete deployment process for Direktori dan Edukasi Komposting Bali using Netlify. The platform is configured for automatic deployments with form handling and serverless functions.
+This guide covers the complete deployment process for Direktori dan Edukasi Komposting Bali using Cloudflare Pages. The platform is configured for automatic deployments with fast global CDN and edge computing capabilities.
 
 ## Prerequisites
 - Node.js 18 or higher
 - npm 9 or higher
 - Git repository connected to GitHub
-- Netlify account
+- Cloudflare account
 
 ## Quick Deployment Steps
 
-### 1. Install Netlify CLI
-```bash
-npm install -g netlify-cli
-# or use the local version
-npm install netlify-cli --save-dev
+### 1. Connect to Cloudflare Pages
+1. Go to [Cloudflare Pages](https://pages.cloudflare.com/)
+2. Sign in to your Cloudflare account
+3. Click "Connect to Git"
+4. Authorize GitHub connection
+5. Select this repository (`bali-composter-directory`)
+
+### 2. Configure Build Settings
+Set the following in the Cloudflare Pages setup:
+
+- **Project name**: `bali-composter-directory`
+- **Production branch**: `main` or `production`
+- **Build command**: `npm run build`
+- **Build output directory**: `dist`
+- **Root directory**: `/` (leave empty)
+
+### 3. Environment Variables
+In Cloudflare Pages dashboard, go to Settings > Environment variables and add:
+
+#### Required for Production
+```env
+NODE_ENV=production
+VITE_APP_TITLE=Direktori dan Edukasi Komposting Bali
+VITE_APP_DESCRIPTION=Platform direktori dan edukasi yang menghubungkan warga Bali dengan layanan komposting lokal
+VITE_APP_URL=https://your-domain.pages.dev
 ```
 
-### 2. Login to Netlify
-```bash
-netlify login
+#### Optional (for enhanced features)
+```env
+VITE_GOOGLE_ANALYTICS_ID=G-XXXXXXXXXX
+VITE_RECAPTCHA_SITE_KEY=6LeXKp0rAAAAAItmfh2ZIhDyBylvWi1KOsafR89j
+VITE_ENABLE_ANALYTICS=true
+VITE_ENABLE_RECAPTCHA=true
 ```
 
-### 3. Initialize Netlify Site
-From your project directory:
-```bash
-netlify init
-```
-This will guide you through connecting your repository and creating a new site.
-
-### 4. Deploy to Production
-```bash
-npm run netlify:deploy:prod
-```
+### 4. Deploy
+Once configured, Cloudflare Pages will automatically:
+- Build and deploy on every push to production branch
+- Create preview deployments for pull requests
+- Serve your site from a global CDN
 
 ## Detailed Configuration
 
 ### Build Settings
-The `netlify.toml` file contains all build configuration:
+The project uses Vite for building:
+- **Framework preset**: Vue
+- **Node.js version**: 18 (latest LTS)
+- **Package manager**: npm
+- **Install command**: `npm install`
 - **Build command**: `npm run build`
-- **Publish directory**: `dist/`
-- **Node.js version**: 18
-- **Functions directory**: `functions/`
+- **Output directory**: `dist`
 
-### Environment Variables
-Set these in your Netlify dashboard (Site settings > Environment variables):
-
-#### Required for Production
-- `NODE_ENV`: `production`
-- `VITE_APP_TITLE`: `Direktori dan Edukasi Komposting Bali`
-- `VITE_APP_URL`: Your production domain
-
-#### Optional (for enhanced features)
-- `GOOGLE_ANALYTICS_ID`: Your GA4 measurement ID
-- `RECAPTCHA_SITE_KEY`: For form spam protection
-- `RECAPTCHA_SECRET_KEY`: Server-side reCAPTCHA verification
+### Performance Features
+Cloudflare Pages provides:
+- **Global CDN**: Sub-100ms response times worldwide
+- **Edge caching**: Static assets cached globally
+- **HTTP/3 support**: Latest protocol for faster loading
+- **Automatic minification**: HTML, CSS, and JS optimization
+- **Brotli compression**: Better compression than gzip
 
 ### Custom Domain Setup
-1. In Netlify dashboard: Site settings > Domain management
-2. Add custom domain (e.g., `bali-composting.com`)
-3. Configure DNS settings with your domain provider:
-   ```
-   CNAME www your-site-name.netlify.app
-   A @ 75.2.60.5
-   AAAA @ 2a05:d014:edb:5702::6
-   ```
-4. Enable HTTPS (automatic with Netlify)
+1. In Cloudflare Pages dashboard: Custom domains
+2. Add your domain (e.g., `bali-composting.com`)
+3. If domain is already on Cloudflare:
+   - DNS records are automatically configured
+4. If domain is external:
+   - Add CNAME record pointing to `your-project.pages.dev`
+5. SSL certificate is automatically provisioned
 
-### Form Handling
-The platform includes two main forms:
-1. **Company Registration Form** (`/company-form`)
-2. **Product Submission Form** (to be implemented)
-
-#### Netlify Forms Configuration
-Forms are automatically detected and configured. The `netlify.toml` includes:
-- Form processing enabled
-- Spam protection
-- Success/error page redirects
-
-#### Serverless Function Integration
-The `functions/form-submission.js` handles advanced form processing:
-- Data validation
-- Email notifications
-- Integration with external APIs
-- Custom business logic
-
-### Performance Optimization
-
-#### Static Asset Caching
-Configured in `netlify.toml`:
-- Images: 1 year cache
-- Assets: Immutable cache with fingerprinting
-- HTML: Dynamic with proper headers
-
-#### Build Optimization
-- CSS/JS bundling and minification enabled
-- HTML pretty URLs for SEO
-- Automatic asset optimization
-
-### Security Headers
-Pre-configured security headers:
-- `X-Frame-Options: DENY`
-- `X-XSS-Protection: 1; mode=block`
-- `X-Content-Type-Options: nosniff`
-- `Referrer-Policy: strict-origin-when-cross-origin`
+### Preview Deployments
+Every pull request gets a unique preview URL:
+- Format: `https://abc123.your-project.pages.dev`
+- Perfect for testing before merging
+- Automatic cleanup after PR is closed
 
 ## Development Workflow
 
-### Local Development with Netlify Dev
+### Local Development
 ```bash
-npm run netlify:dev
-```
-This provides:
-- Local serverless functions
-- Environment variable injection
-- Form handling simulation
-- Edge functions testing
+# Install dependencies
+npm install
 
-### Deploy Previews
-Every pull request automatically generates a deploy preview:
-1. Push to feature branch
-2. Create pull request
-3. Netlify generates preview URL
-4. Test functionality before merging
+# Start development server
+npm run dev
+
+# Build for production
+npm run build
+
+# Preview production build
+npm run preview
+```
+
+### Deployment Process
+1. **Push to main/production branch**: Triggers production deployment
+2. **Create pull request**: Creates preview deployment
+3. **Merge PR**: Updates production site
+4. **Rollback**: Use Cloudflare Pages dashboard to rollback to previous version
 
 ### Branch Deployments
-Configure branch deployments for testing:
-- `main`: Production deployment
+Configure additional branch deployments:
 - `staging`: Staging environment
-- Feature branches: Individual preview deploys
+- `development`: Development environment
+- Feature branches: Automatic preview deployments
 
-## Monitoring and Analytics
+## Form Handling
 
-### Build Monitoring
-Monitor deployments in Netlify dashboard:
-- Build logs and errors
-- Performance metrics
-- Function execution logs
-- Form submission tracking
+### reCAPTCHA Integration
+The site is configured with reCAPTCHA Enterprise for form protection:
 
-### Google Analytics Integration
-Add GA4 tracking code in production:
 ```javascript
-// Add to index.html or main application
-gtag('config', 'YOUR_GA_MEASUREMENT_ID');
+// Example usage in forms
+function onSubmit(e) {
+  e.preventDefault();
+  grecaptcha.enterprise.ready(async () => {
+    const token = await grecaptcha.enterprise.execute('6LeXKp0rAAAAAItmfh2ZIhDyBylvWi1KOsafR89j', {
+      action: 'submit_form'
+    });
+    // Send form with token
+  });
+}
 ```
 
-### Error Tracking
-Implement error tracking for production issues:
-- JavaScript error monitoring
-- Function execution errors
-- Form submission failures
+### Form Processing
+Since Cloudflare Pages doesn't have built-in form handling like Netlify, you have options:
+
+1. **Client-side processing**: Send to external services (EmailJS, Formspree)
+2. **Cloudflare Workers**: Process forms with serverless functions
+3. **External APIs**: Send to your own backend services
+
+## Analytics and Monitoring
+
+### Google Analytics 4
+Integrated with environment variable:
+```javascript
+// Automatically configured when VITE_GOOGLE_ANALYTICS_ID is set
+gtag('config', import.meta.env.VITE_GOOGLE_ANALYTICS_ID);
+```
+
+### Cloudflare Analytics
+Built-in analytics available in Cloudflare dashboard:
+- **Page views and unique visitors**
+- **Traffic by country/region**
+- **Popular pages and referrers**
+- **Core Web Vitals**
+- **Real User Monitoring (RUM)**
+
+### Performance Monitoring
+Monitor site performance:
+- **Build times**: Track build duration trends
+- **Deploy success rate**: Monitor deployment reliability
+- **Core Web Vitals**: Page speed and user experience metrics
+
+## Security
+
+### Automatic Security Headers
+Cloudflare Pages automatically includes:
+- `X-Content-Type-Options: nosniff`
+- `X-Frame-Options: SAMEORIGIN`
+- `X-XSS-Protection: 1; mode=block`
+
+### Additional Security (Optional)
+Configure in Cloudflare dashboard:
+- **WAF (Web Application Firewall)**: Block malicious requests
+- **Rate limiting**: Prevent abuse
+- **Bot protection**: Filter bot traffic
+- **DDoS protection**: Automatic mitigation
 
 ## Troubleshooting
 
 ### Common Build Issues
 
-#### Node.js Version Mismatch
-```toml
-# In netlify.toml
-[build.environment]
-NODE_VERSION = "18"
-```
-
-#### Missing Dependencies
+#### Node.js Version
+Ensure you're using Node.js 18+ locally:
 ```bash
-# Clear cache and reinstall
-rm -rf node_modules package-lock.json
-npm install
+node --version  # Should be 18.x or higher
 ```
 
 #### Build Command Failures
-Check build logs in Netlify dashboard for detailed error messages.
+Check build logs in Cloudflare Pages dashboard:
+1. Go to your project
+2. Click on failed deployment
+3. Review build logs for errors
 
-### Form Submission Issues
-- Verify form `name` attributes match Netlify configuration
-- Check function logs for processing errors
-- Validate environment variables are set
+#### Environment Variables
+Verify environment variables are set correctly:
+- Check Settings > Environment variables
+- Ensure variable names start with `VITE_` for client-side access
+- Redeploy after adding new variables
 
-### Domain and SSL Issues
-- Verify DNS propagation (can take up to 24 hours)
-- Check SSL certificate status in Netlify dashboard
-- Ensure custom domain points to correct Netlify site
+### Performance Issues
+- **Large bundle size**: Use `npm run build -- --analyze` to identify large dependencies
+- **Slow loading**: Optimize images and use lazy loading
+- **Cache issues**: Use Cloudflare's cache purge feature
+
+### Domain Issues
+- **SSL certificate**: Automatically provisioned, may take a few minutes
+- **DNS propagation**: Can take up to 48 hours globally
+- **Mixed content**: Ensure all resources use HTTPS
+
+## Optimization Tips
+
+### Bundle Size Optimization
+```javascript
+// vite.config.js - optimize bundle splitting
+export default {
+  build: {
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          vendor: ['vue', 'bootstrap'],
+          utils: ['./src/utils/dataLoader.js']
+        }
+      }
+    }
+  }
+}
+```
+
+### Image Optimization
+- Use WebP format for images
+- Implement lazy loading
+- Consider Cloudflare Image Resizing (paid feature)
+
+### Caching Strategy
+- Static assets: Immutable caching
+- HTML pages: Short-lived cache with revalidation
+- API responses: Appropriate cache headers
+
+## Cost Management
+- **Cloudflare Pages**: Generous free tier (500 builds/month, unlimited bandwidth)
+- **Custom domains**: Free SSL certificates
+- **Analytics**: Basic analytics included
+- **Advanced features**: Available with paid Cloudflare plans
 
 ## Backup and Recovery
 
-### Site Backup
-Netlify automatically maintains:
-- Site snapshots for rollback
-- Build history and assets
-- Environment variable backups
-- Domain configuration history
+### Version Control
+All deployments are tied to Git commits:
+- Easy rollback to any previous version
+- Full deployment history
+- Source code backup through Git
 
 ### Rollback Process
-1. Go to Netlify dashboard
-2. Navigate to Deploys
-3. Select previous successful deployment
-4. Click "Publish deploy"
-
-## Cost Management
-- **Free tier**: 100GB bandwidth, 300 build minutes
-- **Pro tier**: For higher traffic and advanced features
-- Monitor usage in Netlify dashboard
+1. Go to Cloudflare Pages dashboard
+2. Navigate to Deployments
+3. Find previous successful deployment
+4. Click "Rollback to this deployment"
 
 ## Additional Resources
-- [Netlify Documentation](https://docs.netlify.com/)
-- [Vue.js Deployment Guide](https://vitejs.dev/guide/static-deploy.html#netlify)
-- [Netlify Functions Documentation](https://docs.netlify.com/functions/overview/)
+- [Cloudflare Pages Documentation](https://developers.cloudflare.com/pages/)
+- [Vue.js Deployment Guide](https://vitejs.dev/guide/static-deploy.html#cloudflare-pages)
+- [Cloudflare Workers for dynamic functionality](https://workers.cloudflare.com/)
 
 ## Support
 For deployment issues:
-1. Check Netlify status page
-2. Review build logs
-3. Contact Netlify support
-4. Community forums and Discord
+1. Check [Cloudflare Status](https://www.cloudflarestatus.com/)
+2. Review deployment logs in dashboard
+3. [Cloudflare Community](https://community.cloudflare.com/)
+4. [Discord](https://discord.cloudflare.com/) for real-time help

@@ -9,7 +9,7 @@ The platform serves as both a directory of composting services and an educationa
 - **Frontend**: Vue.js 3 with Composition API
 - **CSS Framework**: Bootstrap 5
 - **Data**: JSON-based (no backend database)
-- **Hosting**: Netlify (static site)
+- **Hosting**: Cloudflare Pages (static site)
 - **Analytics**: Google Analytics 4
 - **Language**: Bahasa Indonesia (primary)
 
@@ -133,7 +133,7 @@ The platform serves as both a directory of composting services and an educationa
 - All content updates through GitHub repository
 - JSON files managed through pull requests
 - Admin workflow for reviewing company/product submissions
-- Automated deployment to Netlify
+- Automated deployment to Cloudflare Pages
 
 ### Development Workflow
 - Feature branches for new functionality

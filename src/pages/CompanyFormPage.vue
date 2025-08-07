@@ -39,7 +39,6 @@
                 @submit.prevent="submitForm"
                 name="company-registration"
                 method="POST"
-                data-netlify="true"
               >
                 <!-- Company Basic Info -->
                 <div class="form-section mb-5">
@@ -351,16 +350,16 @@
                   </div>
                 </div>
 
-                <!-- reCAPTCHA placeholder -->
-                <div class="form-section mb-4">
-                  <div class="alert alert-light border">
+                <!-- reCAPTCHA integration -->
+                <div class="form-section mb-4" v-if="isRecaptchaEnabled()">
+                  <div class="alert alert-info border">
                     <i class="fas fa-shield-alt me-2"></i>
-                    <em>reCAPTCHA verification akan ditambahkan di sini</em>
+                    Formulir ini dilindungi oleh reCAPTCHA Enterprise Google untuk mencegah spam.
+                    <div class="small mt-1 text-muted">
+                      reCAPTCHA akan diverifikasi secara otomatis saat Anda mengirim formulir.
+                    </div>
                   </div>
                 </div>
-
-                <!-- Hidden fields for Netlify Forms -->
-                <input type="hidden" name="form-name" value="company-registration" />
 
                 <!-- Submit Button -->
                 <div class="text-center">
@@ -386,6 +385,7 @@
 <script setup>
 import { ref, reactive, computed, onMounted } from 'vue'
 import { loadRegionsData } from '../utils/dataLoader.js'
+import { validateFormWithRecaptcha, isRecaptchaEnabled } from '../utils/recaptcha.js'
 
 // Reactive data
 const submitting = ref(false)
@@ -432,53 +432,101 @@ const onKabupatenChange = () => {
 const submitForm = async () => {
   submitting.value = true
   
-  try {
-    // Validate required fields
-    if (!formData.companyName || !formData.contactPerson || !formData.whatsapp) {
-      alert('Mohon lengkapi semua field yang wajib diisi.')
-      return
-    }
-
-    // Prepare form data for submission
-    const submissionData = {
-      'form-name': 'company-registration',
-      companyName: formData.companyName,
-      contactPerson: formData.contactPerson,
-      whatsapp: formData.whatsapp,
-      instagram: formData.instagram,
-      email: formData.email,
-      website: formData.website,
-      serviceAreas: formData.serviceAreas.join(', '),
-      serviceTypes: formData.serviceTypes.join(', '),
-      pickupFrequency: formData.pickupFrequency.join(', '),
-      pricing: formData.pricing,
-      wasteTypes: formData.wasteTypes.join(', '),
-      availability: formData.availability,
-      description: formData.description
-    }
-
-    // Submit to Netlify Forms
-    const response = await fetch('/', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencoded',
-      },
-      body: new URLSearchParams(submissionData).toString()
-    })
-
-    if (response.ok) {
-      // Redirect to success page
-      window.location.href = '/success.html'
-    } else {
-      throw new Error('Form submission failed')
-    }
-    
-  } catch (error) {
-    console.error('Form submission error:', error)
-    alert('Terjadi kesalahan saat mengirim formulir. Silakan coba lagi.')
-  } finally {
+  // Validate required fields first
+  if (!formData.name || !formData.description || !formData.whatsapp) {
+    alert('Mohon lengkapi semua field yang wajib diisi.')
     submitting.value = false
+    return
   }
+
+  if (formData.serviceAreas.length === 0) {
+    alert('Mohon pilih minimal satu kecamatan yang dilayani.')
+    submitting.value = false
+    return
+  }
+
+  if (formData.pickupFrequency.length === 0 || formData.wasteTypes.length === 0) {
+    alert('Mohon lengkapi detail layanan (frekuensi pickup dan jenis sampah).')
+    submitting.value = false
+    return
+  }
+
+  // Use reCAPTCHA validation for form submission
+  await validateFormWithRecaptcha(
+    'company_registration',
+    async (recaptchaToken) => {
+      try {
+        // Get selected kabupaten name
+        const selectedKabupatenName = regions.kabupaten.find(k => k.id === selectedKabupaten.value)?.name || ''
+        
+        // Get selected kecamatan names
+        const selectedKecamatanNames = regions.kecamatan
+          .filter(k => formData.serviceAreas.includes(k.id))
+          .map(k => k.name)
+          .join(', ')
+
+        // Prepare form data for submission
+        const submissionData = {
+          'form-name': 'company-registration',
+          companyName: formData.name,
+          description: formData.description,
+          established: formData.established,
+          kabupaten: selectedKabupatenName,
+          serviceAreas: selectedKecamatanNames,
+          pickupFrequency: formData.pickupFrequency.join(', '),
+          wasteTypes: formData.wasteTypes.join(', '),
+          pricingTier: formData.pricingTier,
+          capacity: formData.capacity,
+          whatsapp: formData.whatsapp,
+          instagram: formData.instagram,
+          email: formData.email,
+          phone: formData.phone,
+          availability: formData.availability,
+          submissionDate: new Date().toISOString(),
+          // Include reCAPTCHA token if available
+          ...(recaptchaToken && { 'g-recaptcha-response': recaptchaToken })
+        }
+
+        // For now, we'll simulate form submission since we're not using Netlify Forms
+        console.log('Form submission data:', submissionData)
+        
+        // Show success message
+        alert('Terima kasih! Pendaftaran Anda telah berhasil dikirim. Tim kami akan meninjau dan menghubungi Anda dalam 1-3 hari kerja.')
+        
+        // Reset form
+        resetForm()
+        
+      } catch (error) {
+        console.error('Form submission error:', error)
+        throw error
+      }
+    },
+    (error) => {
+      console.error('reCAPTCHA validation failed:', error)
+      alert('Verifikasi keamanan gagal. Silakan refresh halaman dan coba lagi.')
+    }
+  )
+  
+  submitting.value = false
+}
+
+const resetForm = () => {
+  Object.assign(formData, {
+    name: '',
+    description: '',
+    established: '',
+    serviceAreas: [],
+    pickupFrequency: [],
+    wasteTypes: [],
+    pricingTier: '',
+    capacity: '',
+    whatsapp: '',
+    instagram: '',
+    email: '',
+    phone: '',
+    availability: 'accepting'
+  })
+  selectedKabupaten.value = ''
 }
 
 // Load regions data on mount

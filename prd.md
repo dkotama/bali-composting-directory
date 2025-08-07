@@ -21,7 +21,7 @@ Platform direktori dan edukasi komprehensif yang menghubungkan warga Bali dengan
 ### 2.1 Technology Stack
 - **Frontend**: Vue.js 3 with Bootstrap 5
 - **Data**: JSON-based data structure
-- **Hosting**: Netlify
+- **Hosting**: Cloudflare Pages
 - **Analytics**: Google Analytics 4
 - **Language**: Bahasa Indonesia (primary)
 

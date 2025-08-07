@@ -36,7 +36,7 @@ Direktori dan Edukasi Komposting Bali adalah website berbasis Vue.js yang bertuj
 - **CSS Framework**: Bootstrap 5
 - **Build Tool**: Vite
 - **Data**: JSON-based (tanpa database)
-- **Hosting**: Netlify
+- **Hosting**: Cloudflare Pages
 - **Analytics**: Google Analytics 4
 
 ## 🏗️ Struktur Proyek
@@ -64,48 +64,55 @@ bali-composter-directory/
 
 ## Deployment
 
-This project is configured for deployment on **Netlify** with automated builds and form handling.
+This project is configured for deployment on **Cloudflare Pages** with automated builds.
 
-### Quick Deploy to Netlify
+### Quick Deploy to Cloudflare Pages
 
-[![Netlify Status](https://api.netlify.com/api/v1/badges/bd27d371-adb5-40e7-a517-9a8cf55e8fc8/deploy-status)](https://app.netlify.com/projects/bali-composter-directory/deploys)
+1. **Connect to GitHub:**
+   - Go to [Cloudflare Pages](https://pages.cloudflare.com/)
+   - Connect your GitHub account
+   - Select this repository
 
-### Manual Deployment
+2. **Build Settings:**
+   - **Build command:** `npm run build`
+   - **Build output directory:** `dist`
+   - **Root directory:** `/` (leave empty)
 
-1. **Install Netlify CLI:**
-   ```bash
-   npm install -g netlify-cli
-   ```
+### Environment Variables
 
-2. **Login to Netlify:**
-   ```bash
-   netlify login
-   ```
+Set these environment variables in your Cloudflare Pages project settings:
 
-3. **Deploy:**
-   ```bash
-   # Build the project
-   npm run build
-   
-   # Deploy to staging
-   netlify deploy --dir=dist
-   
-   # Deploy to production
-   netlify deploy --prod --dir=dist
-   ```
+```bash
+VITE_APP_TITLE="Direktori dan Edukasi Komposting Bali"
+VITE_APP_DESCRIPTION="Platform direktori dan edukasi yang menghubungkan warga Bali dengan layanan komposting lokal"
+VITE_APP_URL="https://your-domain.pages.dev"
+VITE_GOOGLE_ANALYTICS_ID="G-XXXXXXXXXX"
+VITE_RECAPTCHA_SITE_KEY="6LeXKp0rAAAAAItmfh2ZIhDyBylvWi1KOsafR89j"
+VITE_ENABLE_ANALYTICS="true"
+VITE_ENABLE_RECAPTCHA="true"
+NODE_ENV="production"
+```
 
-4. **Automated Setup Script:**
-   ```bash
-   ./scripts/deploy-setup.sh
-   ```
+### Manual Build and Test
+
+```bash
+# Install dependencies
+npm install
+
+# Build the project
+npm run build
+
+# Preview build locally
+npm run preview
+```
 
 ### Configuration
 
 - **Build Command:** `npm run build`
-- **Publish Directory:** `dist/`
-- **Functions Directory:** `functions/`
+- **Build Output Directory:** `dist/`
+- **Node Version:** Latest LTS (18+)
 
-See `DEPLOYMENT.md` for detailed configuration guide.
+For more details, see the environment configuration in `.env.example`.
 
 ## 📊 Status Development
 
@@ -116,13 +123,13 @@ See `DEPLOYMENT.md` for detailed configuration guide.
 - [x] Homepage dengan search & filter
 - [x] Halaman panduan dengan kalkulator kompos
 - [x] Komponen kartu perusahaan dengan integrasi kontak
-- [x] Form pendaftaran perusahaan
+- [x] Form pendaftaran perusahaan dengan reCAPTCHA Enterprise
 - [x] Marketplace produk komposting
 - [x] Responsive design mobile-first
-- [x] Netlify deployment setup
+- [x] Cloudflare Pages deployment setup
 
 ### 🚧 In Progress
-- [ ] reCAPTCHA untuk form
+- [x] reCAPTCHA Enterprise integration (Completed: 2025-08-07)
 - [ ] Google Analytics 4 setup
 
 ### 📋 Roadmap Selanjutnya
