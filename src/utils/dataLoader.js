@@ -1,5 +1,5 @@
 /**
- * Data loading utilities for the Bali Composting Platform
+ * Data loading utilities for Direktori dan Edukasi Komposting Bali
  * Handles loading and caching of JSON data files
  */
 

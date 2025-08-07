@@ -1,10 +1,10 @@
 #!/bin/bash
 
-# Netlify Deployment Setup Script for Bali Composting Platform
+# Netlify Deployment Setup Script for Direktori dan Edukasi Komposting Bali
 # This script helps set up the initial Netlify deployment
 
-echo "🌿 Bali Composting Platform - Netlify Setup"
-echo "========================================="
+echo "� Direktori dan Edukasi Komposting Bali - Netlify Setup"
+echo "======================================================="
 
 # Check if Netlify CLI is installed
 if ! command -v netlify &> /dev/null; then

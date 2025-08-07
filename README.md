@@ -1,10 +1,10 @@
-# Platform Layanan Komposting Bali
+# Direktori dan Edukasi Komposting Bali
 
 🌱 **Platform komprehensif yang menghubungkan warga Bali dengan layanan komposting lokal dan menyediakan sumber daya edukasi untuk pengelolaan sampah berkelanjutan.**
 
 ## 🎯 Tentang Proyek
 
-Platform Layanan Komposting Bali adalah website berbasis Vue.js yang bertujuan untuk:
+Direktori dan Edukasi Komposting Bali adalah website berbasis Vue.js yang bertujuan untuk:
 
 - Menghubungkan warga Bali dengan penyedia layanan komposting lokal
 - Memberikan edukasi praktis tentang komposting di rumah

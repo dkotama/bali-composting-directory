@@ -1,7 +1,9 @@
-# Copilot Instructions - Bali Composting Services Platform
+# Copilot Instructions - Direktori dan Edukasi Komposting Bali
 
 ## Project Overview
 You are assisting with the development of a Vue.js-based web platform that connects Bali residents with local composting services and provides educational resources for sustainable waste management. This is a non-profit project focused on environmental sustainability in Bali, Indonesia.
+
+The platform serves as both a directory of composting services and an educational hub for sustainable waste management practices.
 
 ## Technology Stack
 - **Frontend**: Vue.js 3 with Composition API

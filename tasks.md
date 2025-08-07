@@ -1,4 +1,4 @@
-# Bali Composting Services Platform - Development Tasks
+# Direktori dan Edukasi Komposting Bali - Development Tasks
 
 ## Phase 1: Project Foundation & Setup
 

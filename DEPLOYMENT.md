@@ -1,7 +1,7 @@
 # Netlify Deployment Guide
 
 ## Overview
-This guide covers the complete deployment process for the Bali Composting Services Platform using Netlify. The platform is configured for automatic deployments with form handling and serverless functions.
+This guide covers the complete deployment process for Direktori dan Edukasi Komposting Bali using Netlify. The platform is configured for automatic deployments with form handling and serverless functions.
 
 ## Prerequisites
 - Node.js 18 or higher
@@ -49,7 +49,7 @@ Set these in your Netlify dashboard (Site settings > Environment variables):
 
 #### Required for Production
 - `NODE_ENV`: `production`
-- `VITE_APP_TITLE`: `Bali Composting Services`
+- `VITE_APP_TITLE`: `Direktori dan Edukasi Komposting Bali`
 - `VITE_APP_URL`: Your production domain
 
 #### Optional (for enhanced features)

@@ -1,14 +1,14 @@
-# Bali Composting Services Platform - Product Requirements Document
+# Direktori dan Edukasi Komposting Bali - Product Requirements Document
 
 ## 1. Project Overview
 
 ### 1.1 Project Vision
-A comprehensive web platform connecting Bali residents with local composting services while providing educational resources for sustainable waste management. The platform serves as a directory for composting companies and educates users on home composting methods.
+Platform direktori dan edukasi komprehensif yang menghubungkan warga Bali dengan layanan komposting lokal sambil menyediakan sumber daya edukasi untuk pengelolaan sampah berkelanjutan. Platform ini berfungsi sebagai direktori perusahaan komposting dan mengedukasi pengguna tentang metode komposting rumahan.
 
 ### 1.2 Project Goals
-- Connect Bali residents with local composting service providers
-- Educate users about home composting methods
-- Support local environmental sustainability initiatives
+- Menghubungkan warga Bali dengan penyedia layanan komposting lokal
+- Mengedukasi pengguna tentang metode komposting rumahan
+- Mendukung inisiatif keberlanjutan lingkungan lokal
 - Provide a centralized, searchable database of composting services across Bali
 
 ### 1.3 Target Audience

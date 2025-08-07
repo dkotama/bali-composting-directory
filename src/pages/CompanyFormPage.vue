@@ -9,8 +9,8 @@
               Daftarkan Layanan Komposting Anda
             </h1>
             <p class="lead mb-4">
-              Bergabunglah dengan platform komposting Bali dan jangkau lebih banyak pelanggan 
-              yang peduli lingkungan
+              Bergabunglah dengan Direktori dan Edukasi Komposting Bali untuk menjangkau lebih banyak 
+              pelanggan yang peduli lingkungan
             </p>
           </div>
         </div>

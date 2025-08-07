@@ -4,7 +4,7 @@
     <nav class="navbar navbar-expand-lg navbar-dark">
       <div class="container">
         <a class="navbar-brand" href="#">
-          🌱 Platform Komposting Bali
+          🌱 Direktori dan Edukasi Komposting Bali
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
           <span class="navbar-toggler-icon"></span>
@@ -42,12 +42,12 @@
       <div class="container">
         <div class="row">
           <div class="col-md-6">
-            <h5>Platform Komposting Bali</h5>
-            <p class="mb-0">Menghubungkan warga Bali dengan layanan komposting berkelanjutan</p>
+            <h5>Direktori dan Edukasi Komposting Bali</h5>
+            <p class="mb-0">Menghubungkan warga Bali dengan layanan komposting dan edukasi berkelanjutan</p>
           </div>
           <div class="col-md-6 text-md-end">
             <p class="mb-0">
-              <small>© 2025 Platform Komposting Bali. Dibuat untuk lingkungan yang lebih bersih.</small>
+              <small>© 2025 Direktori dan Edukasi Komposting Bali. Dibuat untuk lingkungan yang lebih bersih.</small>
             </p>
           </div>
         </div>

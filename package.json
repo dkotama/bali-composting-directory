@@ -1,5 +1,5 @@
 {
-  "name": "bali-composter-directory",
+  "name": "direktori-edukasi-komposting-bali",
   "version": "1.0.0",
   "private": true,
   "type": "module",
@@ -14,10 +14,10 @@
     "netlify:deploy:prod": "netlify deploy --prod",
     "functions:serve": "netlify functions:serve"
   },
-  "keywords": ["vue", "composting", "bali", "sustainability", "environment"],
-  "author": "Bali Composting Platform",
+  "keywords": ["vue", "composting", "bali", "sustainability", "environment", "directory", "education"],
+  "author": "Direktori dan Edukasi Komposting Bali",
   "license": "MIT",
-  "description": "A comprehensive web platform connecting Bali residents with local composting services and educational resources for sustainable waste management",
+  "description": "Platform direktori dan edukasi komposting yang menghubungkan warga Bali dengan layanan komposting lokal dan sumber daya edukasi untuk pengelolaan sampah berkelanjutan",
   "dependencies": {
     "@vitejs/plugin-vue": "^5.2.4",
     "bootstrap": "^5.3.7",

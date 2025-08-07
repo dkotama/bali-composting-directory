@@ -6,11 +6,11 @@
         <div class="row justify-content-center text-center">
           <div class="col-lg-8">
             <h1 class="display-4 fw-bold mb-4">
-              Platform Layanan Komposting Bali
+              Direktori dan Edukasi Komposting Bali
             </h1>
             <p class="lead mb-4">
-              Temukan layanan komposting terpercaya di seluruh Bali dan mulai berkontribusi 
-              untuk lingkungan yang lebih bersih dan berkelanjutan.
+              Platform terpadu untuk menemukan layanan komposting lokal dan mempelajari 
+              cara mengelola sampah organik secara berkelanjutan di Bali.
             </p>
             <div class="hero-buttons">
               <button class="btn btn-light btn-lg me-3" @click="scrollToSearch">
