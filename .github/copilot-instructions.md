@@ -9,7 +9,6 @@ The platform serves as both a directory of composting services and an educationa
 - **Frontend**: Vue.js 3 with Composition API
 - **CSS Framework**: Bootstrap 5
 - **Data**: JSON-based (no backend database)
-- **Maps**: Leaflet.js for location visualization
 - **Hosting**: Netlify (static site)
 - **Analytics**: Google Analytics 4
 - **Language**: Bahasa Indonesia (primary)
@@ -79,7 +78,6 @@ The platform serves as both a directory of composting services and an educationa
 - **Composting Calculator**: Input waste amount → output timeline
 - **Method Selection**: Biopore vs Composter Bin options
 - **Contact Integration**: WhatsApp click-to-chat, Instagram links
-- **Map Visualization**: Show service areas using Leaflet.js
 
 ### 4. Form Handling
 - Company submission form with validation

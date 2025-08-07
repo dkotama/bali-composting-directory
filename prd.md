@@ -23,7 +23,6 @@ Platform direktori dan edukasi komprehensif yang menghubungkan warga Bali dengan
 - **Data**: JSON-based data structure
 - **Hosting**: Netlify
 - **Analytics**: Google Analytics 4
-- **Maps**: Leaflet.js for location visualization
 - **Language**: Bahasa Indonesia (primary)
 
 ### 2.2 Design System

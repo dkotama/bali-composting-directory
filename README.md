@@ -17,7 +17,6 @@ Direktori dan Edukasi Komposting Bali adalah website berbasis Vue.js yang bertuj
 - Pencarian berdasarkan lokasi (Kabupaten/Kecamatan)
 - Filter lanjutan (harga, frekuensi pickup, jenis sampah)
 - Status ketersediaan real-time (menerima, waitlist, penuh)
-- Tampilan peta interaktif untuk area layanan
 
 ### 📚 Konten Edukasi
 - Panduan komposting step-by-step (Biopore vs Komposter Bin)
@@ -36,7 +35,6 @@ Direktori dan Edukasi Komposting Bali adalah website berbasis Vue.js yang bertuj
 - **Frontend**: Vue.js 3 (Composition API)
 - **CSS Framework**: Bootstrap 5
 - **Build Tool**: Vite
-- **Maps**: Leaflet.js
 - **Data**: JSON-based (tanpa database)
 - **Hosting**: Netlify
 - **Analytics**: Google Analytics 4
@@ -54,8 +52,7 @@ bali-composter-directory/
 │   │   ├── common/          # Komponen umum
 │   │   ├── search/          # Komponen pencarian
 │   │   ├── forms/           # Form input
-│   │   ├── educational/     # Konten edukasi
-│   │   └── maps/            # Integrasi peta
+│   │   └── educational/     # Konten edukasi
 │   ├── pages/               # Halaman utama
 │   ├── utils/               # Utilitas & data loader
 │   └── assets/              # Asset & CSS
@@ -71,7 +68,7 @@ This project is configured for deployment on **Netlify** with automated builds a
 
 ### Quick Deploy to Netlify
 
-[![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/yourusername/bali-composter-directory)
+[![Netlify Status](https://api.netlify.com/api/v1/badges/bd27d371-adb5-40e7-a517-9a8cf55e8fc8/deploy-status)](https://app.netlify.com/projects/bali-composter-directory/deploys)
 
 ### Manual Deployment
 
@@ -125,7 +122,6 @@ See `DEPLOYMENT.md` for detailed configuration guide.
 - [x] Netlify deployment setup
 
 ### 🚧 In Progress
-- [ ] Integrasi peta Leaflet.js penuh
 - [ ] reCAPTCHA untuk form
 - [ ] Google Analytics 4 setup
 

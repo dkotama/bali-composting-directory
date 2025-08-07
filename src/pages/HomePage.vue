@@ -57,39 +57,21 @@
               <div class="btn-group" role="group">
                 <button 
                   type="button" 
-                  class="btn btn-outline-primary"
-                  :class="{ active: viewMode === 'list' }"
-                  @click="viewMode = 'list'"
+                  class="btn btn-outline-primary active"
                 >
                   <i class="fas fa-list"></i>
-                </button>
-                <button 
-                  type="button" 
-                  class="btn btn-outline-primary"
-                  :class="{ active: viewMode === 'map' }"
-                  @click="viewMode = 'map'"
-                >
-                  <i class="fas fa-map"></i>
                 </button>
               </div>
             </div>
           </div>
 
           <!-- List View -->
-          <div v-if="viewMode === 'list'" class="companies-list">
+          <div class="companies-list">
             <CompanyCard 
               v-for="company in searchResults" 
               :key="company.id"
               :company="company"
               class="mb-3"
-            />
-          </div>
-
-          <!-- Map View -->
-          <div v-if="viewMode === 'map'" class="map-view">
-            <ServiceMap 
-              :companies="searchResults"
-              :selected-area="selectedArea"
             />
           </div>
 
@@ -199,7 +181,6 @@
 import { ref, reactive, onMounted } from 'vue'
 import SearchForm from '../components/search/SearchForm.vue'
 import CompanyCard from '../components/common/CompanyCard.vue'
-import ServiceMap from '../components/maps/ServiceMap.vue'
 import { loadRegionsData, loadCompaniesData, helpers } from '../utils/dataLoader.js'
 
 // Emits
@@ -210,7 +191,6 @@ const searchLoading = ref(false)
 const searchPerformed = ref(false)
 const searchResults = ref([])
 const selectedArea = ref('')
-const viewMode = ref('list')
 
 // Data
 const regions = reactive({ kabupaten: [], kecamatan: [] })

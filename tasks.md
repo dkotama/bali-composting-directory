@@ -44,10 +44,7 @@
 - [x] Create availability status indicators (accepting, waitlist, full) (Completed: 2025-08-07)
 - [x] Build contact integration buttons (WhatsApp, Instagram) (Completed: 2025-08-07)
 
-#### 2.1.4 Map Integration
-- [x] Integrate Leaflet.js for interactive maps (Placeholder created: 2025-08-07)
-- [ ] Display service areas on map with region boundaries  
-- [ ] Add company location markers with popup information
+### 2.2 Forms & User Input
 - [ ] Implement map-search synchronization
 
 ### 2.2 How-To Page (Educational Content)
@@ -214,7 +211,6 @@
 ## Dependencies
 
 - Vue.js 3 and Bootstrap 5 expertise
-- Leaflet.js mapping knowledge
 - GitHub API integration experience
 - Google Analytics setup knowledge
 - Bahasa Indonesia content creation
