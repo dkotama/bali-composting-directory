@@ -3,11 +3,34 @@ import { createClient } from '@supabase/supabase-js'
 const supabaseUrl = import.meta.env.VITE_SUPABASE_PROJECT_URL
 const supabaseKey = import.meta.env.VITE_SUPABASE_API_KEY
 
-if (!supabaseUrl || !supabaseKey) {
-  throw new Error('Supabase configuration is missing. Please check your environment variables.')
+// Debug environment variables (remove in production)
+console.log('Environment variables check:', {
+  supabaseUrl: supabaseUrl ? 'Set' : 'Missing',
+  supabaseKey: supabaseKey ? 'Set' : 'Missing',
+  env: import.meta.env.MODE,
+  allEnvVars: Object.keys(import.meta.env)
+})
+
+// Check if Supabase is properly configured
+const isSupabaseConfigured = !!(supabaseUrl && supabaseKey)
+
+let supabase = null
+if (isSupabaseConfigured) {
+  try {
+    supabase = createClient(supabaseUrl, supabaseKey)
+    console.log('Supabase client initialized successfully')
+  } catch (error) {
+    console.error('Failed to initialize Supabase client:', error)
+  }
+} else {
+  const missingVars = []
+  if (!supabaseUrl) missingVars.push('VITE_SUPABASE_PROJECT_URL')
+  if (!supabaseKey) missingVars.push('VITE_SUPABASE_API_KEY')
+  
+  console.warn(`Supabase not configured. Missing variables: ${missingVars.join(', ')}. App will run in JSON-only mode.`)
 }
 
-export const supabase = createClient(supabaseUrl, supabaseKey)
+export { supabase, isSupabaseConfigured }
 
 // Environment detection
 export const isDev = import.meta.env.DEV || import.meta.env.VITE_ENVIRONMENT === 'development'
@@ -17,6 +40,11 @@ export const currentEnvironment = isDev ? 'dev' : 'prod'
 export class DataService {
   // Load companies with filtering
   async getCompanies(filters = {}) {
+    if (!isSupabaseConfigured || !supabase) {
+      console.warn('Supabase not available, falling back to JSON data')
+      return this.getCompaniesFromJSON(filters)
+    }
+
     try {
       let query = supabase.from('companies').select('*')
       
@@ -49,13 +77,42 @@ export class DataService {
       
       return data || []
     } catch (error) {
-      console.error('Failed to load companies:', error)
+      console.error('Failed to load companies from Supabase:', error)
+      console.log('Falling back to JSON data')
+      return this.getCompaniesFromJSON(filters)
+    }
+  }
+
+  // Fallback method to load companies from JSON
+  async getCompaniesFromJSON(filters = {}) {
+    try {
+      const response = await fetch('/data/companies.json')
+      if (!response.ok) throw new Error('Failed to load companies.json')
+      const data = await response.json()
+      
+      let companies = data.companies || []
+      
+      // Apply basic filtering
+      if (filters.serviceAreas?.length) {
+        companies = companies.filter(company => 
+          company.service_areas?.some(area => filters.serviceAreas.includes(area))
+        )
+      }
+      
+      return companies
+    } catch (error) {
+      console.error('Failed to load companies from JSON:', error)
       return []
     }
   }
 
   // Load single company by ID
   async getCompany(id) {
+    if (!isSupabaseConfigured || !supabase) {
+      console.warn('Supabase not available, falling back to JSON data')
+      return this.getCompanyFromJSON(id)
+    }
+
     try {
       const { data, error } = await supabase
         .from('companies')
@@ -66,13 +123,33 @@ export class DataService {
       if (error) throw error
       return data
     } catch (error) {
-      console.error('Failed to load company:', error)
+      console.error('Failed to load company from Supabase:', error)
+      return this.getCompanyFromJSON(id)
+    }
+  }
+
+  // Fallback method to load single company from JSON
+  async getCompanyFromJSON(id) {
+    try {
+      const response = await fetch('/data/companies.json')
+      if (!response.ok) throw new Error('Failed to load companies.json')
+      const data = await response.json()
+      
+      const companies = data.companies || []
+      return companies.find(company => company.id === id) || null
+    } catch (error) {
+      console.error('Failed to load company from JSON:', error)
       return null
     }
   }
 
   // Load products with filtering
   async getProducts(filters = {}) {
+    if (!isSupabaseConfigured || !supabase) {
+      console.warn('Supabase not available, falling back to JSON data')
+      return this.getProductsFromJSON(filters)
+    }
+
     try {
       let query = supabase.from('products').select('*')
       
@@ -93,13 +170,38 @@ export class DataService {
       
       return data || []
     } catch (error) {
-      console.error('Failed to load products:', error)
+      console.error('Failed to load products from Supabase:', error)
+      return this.getProductsFromJSON(filters)
+    }
+  }
+
+  // Fallback method to load products from JSON
+  async getProductsFromJSON(filters = {}) {
+    try {
+      const response = await fetch('/data/products.json')
+      if (!response.ok) throw new Error('Failed to load products.json')
+      const data = await response.json()
+      
+      let products = data.products || []
+      
+      // Apply basic filtering
+      if (filters.category && filters.category !== 'all') {
+        products = products.filter(product => product.category === filters.category)
+      }
+      
+      return products
+    } catch (error) {
+      console.error('Failed to load products from JSON:', error)
       return []
     }
   }
 
-  // Submit company request (available in both dev and prod)
+  // Submit company request (requires Supabase)
   async submitCompanyRequest(requestData) {
+    if (!isSupabaseConfigured || !supabase) {
+      throw new Error('Form submission requires Supabase configuration. Please contact the administrator.')
+    }
+
     try {
       const submissionData = {
         ...requestData,
@@ -126,8 +228,12 @@ export class DataService {
     }
   }
 
-  // Submit product request (available in both dev and prod)
+  // Submit product request (requires Supabase)
   async submitProductRequest(requestData) {
+    if (!isSupabaseConfigured || !supabase) {
+      throw new Error('Form submission requires Supabase configuration. Please contact the administrator.')
+    }
+
     try {
       const submissionData = {
         ...requestData,
@@ -156,6 +262,10 @@ export class DataService {
 
   // Get request statistics (for admin/monitoring)
   async getRequestStats() {
+    if (!isSupabaseConfigured || !supabase) {
+      return { companies: { total: 0 }, products: { total: 0 } }
+    }
+
     try {
       const [companyStats, productStats] = await Promise.all([
         supabase
@@ -186,6 +296,10 @@ export class DataService {
 
   // Load pending requests (for admin interface)
   async getPendingRequests(type = 'company') {
+    if (!isSupabaseConfigured || !supabase) {
+      return []
+    }
+
     try {
       const table = type === 'company' ? 'company_requests' : 'product_requests'
       
